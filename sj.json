@@ -1,0 +1,49 @@
+{
+    "code": 0,
+    "msg": "",
+    "count": 1000,
+    "data": [
+        {
+            "id": "10001",
+            "factor name": "roaddensity",
+            "factor kind": "X",
+            "weight": "0"
+        },
+        {
+            "id": "10002",
+            "factor name": "popudensity",
+            "factor kind": "X",
+            "weight": "0"
+        },
+        {
+            "id": "10003",
+            "factor name": "clusterdegree",
+            "factor kind": "X",
+            "weight": "0"
+        },
+        {
+            "id": "10004",
+            "factor name": "elevationmean",
+            "factor kind": "X",
+            "weight": "0"
+        },
+        {
+            "id": "10005",
+            "factor name": "elevationstandard",
+            "factor kind": "X",
+            "weight": "0"
+        },
+        {
+            "id": "10006",
+            "factor name": "soilmiscibility",
+            "factor kind": "X",
+            "weight": "0"
+        },
+        {
+            "id": "10007",
+            "factor name": "maxiareapropo",
+            "factor kind": "X",
+            "weight": "0"
+        }
+    ]
+}

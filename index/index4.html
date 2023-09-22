@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../layui-main/layui-main/dist/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../layui-main/layui-main/dist/css/layui.css" media="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>左--右穿梭框</title>
+    <style>
+        .box>.left,
+        .box>.right {
+            min-width: 300px;
+            min-height: 400px;
+            border: 1px solid black;
+            margin: 10px;
+        }
+
+        .box>.right2 {
+            min-width: 300px;
+            min-height: 400px;
+            border: 1px solid black;
+            margin: 10px;
+        }
+
+        #one>div,
+        #two>div {
+            background: #fff;
+            height: 25px;
+        }
+
+        /* 鼠标滑过 */
+        #one>div:hover,
+        #two>div:hover {
+            background: #ff9900;
+        }
+
+        .box {
+            display: flex;
+        }
+
+        .btn {
+            padding-top: 100px;
+        }
+
+        .btn>button {
+            margin-top: 10px;
+        }
+
+        .box>.btn {
+            display: flex;
+            flex-direction: column;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label>模块名称:</label>
+        <input type="text" id="name">
+        <button id="add"> 添加</button>
+
+    </div>
+    <div>
+        <button id="get"> 获得数据</button>
+
+    </div>
+    <div class="box">
+        <div class="left">
+            <h1>未选模块</h1>
+            <div id="one">
+                <div>111</div>
+                <div>111</div>
+                <div>111</div>
+            </div>
+
+        </div>
+        <div class="btn">
+            <button id="alladd">全部添加&gt;&gt;</button>
+            <button id="right">添加&gt;&gt;</button>
+            <button id="right2">添加2&gt;&gt;</button>
+            <button id="left">&lt;&lt;删除</button>
+            <button id="left2">&lt;&lt;删除2</button>
+            <button id="alldel">&lt;&lt;全部删除</button>
+        </div>
+        <div class="right">
+            <h1>我的模块</h1>
+            <div id="two">
+                <div>哈哈哈</div>
+                <div>哈哈哈</div>
+                <div>搜索</div>
+            </div>
+        </div>
+        <div class="right2">
+            <h1>我的模块</h1>
+            <div id="three">
+                <div>哈哈哈</div>
+                <div>哈哈哈</div>
+                <div>搜索</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form">
+        <select lay-filter="demo-select-filter">
+            <option value="">请选择</option>
+            <option value="equal_interval">equal_interval</option>
+            <option value="quantile">quantile</option>
+            <option value="naturalbreaks">naturalbreaks</option>
+        </select>
+    </div>
+
+    <script>
+        var funname;
+        layui.use(function () {
+            var form = layui.form;
+            var layer = layui.layer;
+            // select 事件
+            form.on('select(demo-select-filter)', function (data) {
+                var elem = data.elem; // 获得 select 原始 DOM 对象
+                funname = data.value; // 获得被选中的值
+                var othis = data.othis; // 获得 select 元素被替换后的 jQuery 对象
+
+                // layer.msg(this.innerHTML + ' 的 value: ' + value); // this 为当前选中 <option> 元素对象
+            });
+        });
+    </script>
+
+
+    <div id="ID-slider-demo-input"></div>
+
+
+
+    <script>
+        var hvalue;
+        layui.use(function () {
+            var slider = layui.slider;
+            // 渲染
+            slider.render({
+                elem: '#ID-slider-demo-input',
+                input: true,
+                change: function (value) {
+                    hvalue = value;// 滑块当前值
+                    // do something
+                }//输入框
+            });
+        });
+    </script>
+    <script>
+        //数据模拟
+        /* var arr2=[
+        {"id":11,"name":"1111","check":false},
+        {"id":22,"name":"2222","check":false},
+        {"id":33,"name":"3333","check":true},
+        {"id":44,"name":"4444","check":true},
+        {"id":55,"name":"5555","check":false},
+        ]; */
+        // var arr2 = localStorage.getItem("p2KaoShi") ? JSON.parse(localStorage.getItem("p2KaoShi")).info : []
+        var arr2 = [
+            { "id": 10001, "name": "roaddensity", "check": false, "kind": 'null', "Y": 0 },
+            { "id": 10002, "name": "popudensity", "check": false, "kind": 'null', "Y": 0 },
+            { "id": 10003, "name": "clusterdegree", "check": false, "kind": 'null', "Y": 0 },
+            { "id": 10004, "name": "elevationmean", "check": false, "kind": 'null', "Y": 0 },
+            { "id": 10005, "name": "elevationstandard", "check": false, "kind": 'null', "Y": 0 },
+            { "id": 10006, "name": "soilmiscibility", "check": false, "kind": 'null', "Y": 0 },
+            { "id": 10007, "name": "maxiareapropo", "check": false, "kind": 'null', "Y": 0 },
+            { "id": 10008, "name": "Y", "check": false, "kind": 'null', "Y": 0 },
+        ];
+        var arr22 = localStorage.getItem("p2KaoShi") ? JSON.parse(localStorage.getItem("p2KaoShi")).info : []
+        //渲染数据
+        //获取渲染到左边的大盒子,通过id
+        var oneDom = document.getElementById("one");
+        //获取渲染到右边的大盒子,通过id
+        var twoDom = document.getElementById("two");
+        var threeDom = document.getElementById("three");
+        var indexp;
+
+        //把可点击自由移动的小盒子,渲染到页面,
+        //循环数据arr2,判断check值为true则渲染到左边,check值为false则渲染到右边,
+        function show(res) {
+            var leftstr = "";
+            var rightstr = "";
+            for (var i = 0; i < res.length; i++) {
+                if (res[i].check == false) {
+                    leftstr += ` <div onclick="toleft(${res[i].id})">
+        ${res[i].name}</div>
+        `
+                } else if (res[i].check == true && res[i].kind == 'tbd') {
+                    rightstr += `
+        <div onclick="toright(${res[i].id})">${res[i].name}</div>
+        `
+                }
+            }
+            for (var i = 0; i < res.length; i++) {
+                if (res[i].kind == 'tbd') { res[i].kind = 'x'; }
+            } //把字符串leftstr写入id为one的盒子
+            oneDom.innerHTML = leftstr; //把字符串leftstr写入id为one的盒子
+            twoDom.innerHTML = rightstr;
+        }
+        function show2(res) {
+            var leftstr = "";
+            var rightstr = "";
+            for (var i = 0; i < res.length; i++) {
+                if (res[i].check == false) {
+                    leftstr += `
+            <div onclick="toleft(${res[i].id})">${res[i].name}</div>
+            `
+                } else if (res[i].check == true && res[i].kind == 'tbd') {
+                    rightstr += `
+            <div onclick="toright2(${res[i].id})">${res[i].name}</div>
+            `
+                }
+            }
+            for (var i = 0; i < res.length; i++) { if (res[i].kind == 'tbd') { res[i].kind = 'y'; } }
+            //把字符串leftstr写入id为one的盒子
+            oneDom.innerHTML = leftstr; //把字符串leftstr写入id为one的盒子
+            threeDom.innerHTML = rightstr;
+        } //页面加载完毕调用渲染show
+        window.onload = function () {
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
+            show(arr2);
+            show2(arr2);
+        } //点击左边的数据的小盒子,通过findIndex找到下标index
+        function toleft(id) {
+            var
+                index = arr2.findIndex(function (v) { return v.id == id; }) //点击他之后取反,即他会到另一个盒子 
+            arr2[index].kind = 'tbd';
+            arr2[index].check = !arr2[index].check; //console.log('index :>> ', index);
+            //console.log('arr2[index] :>> ', arr2[index]);
+            var e = event || window.event;
+            //判断,在左边的盒子里,如果点击的对象的check值为true,然后变背景颜色为红色
+            //如果对象的check值为false,则背景颜色为空
+            if (arr2[index].check === true) {
+                //console.log(arr2[index].check);
+                e.target.style.background = "red";
+                //console.log(e.target);
+            } else {
+                e.target.style.background = "";
+            }
+        }
+        //点击右边的数据的小盒子,通过findIndex找到下标index
+        function toright(id) {
+            var index = arr2.findIndex(function (v) {
+                return v.id == id;
+            })
+            //点击他之后取反,即他会到另一个盒子,不会立即执行,调用函数才执行
+            arr2[index].check = !arr2[index].check;
+            arr2[index].kind = 'null';
+            var e = event || window.event;
+            //判断,在右边的盒子里,如果点击的对象的check值为false,然后变背景颜色为红色
+            //如果对象的check值为true,则背景颜色为空
+            if (arr2[index].check == false) {
+                e.target.style.background = "red";
+            } else {
+                e.target.style.background = "";
+            }
+        }
+
+        function toright2(id) {
+            var index = arr2.findIndex(function (v) {
+                return v.id == id;
+            })
+            //点击他之后取反,即他会到另一个盒子,不会立即执行,调用函数才执行
+            arr2[index].check = !arr2[index].check;
+            var e = event || window.event;
+            //判断,在右边的盒子里,如果点击的对象的check值为false,然后变背景颜色为红色
+            //如果对象的check值为true,则背景颜色为空
+            if (arr2[index].check == false) {
+                e.target.style.background = "red";
+            } else {
+                e.target.style.background = "";
+            }
+        }
+        //点击<<向右添加>>按钮,调用渲染函数
+        var rightDom = document.getElementById("right");
+        rightDom.onclick = function () {
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
+
+            show(arr2);
+        }
+
+        var right2Dom = document.getElementById("right2");
+        right2Dom.onclick = function () {
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
+
+            show2(arr2);
+        }
+
+        //点击<<向左删除>>按钮,调用渲染函数
+        var leftDom = document.getElementById("left");
+        leftDom.onclick = function () {
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
+            show(arr2);
+        }
+
+        var left2Dom = document.getElementById("left2");
+        left2Dom.onclick = function () {
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
+            show2(arr2);
+        }
+        //点击<<全部添加>>按钮,调用渲染函数
+        var alladdDom = document.getElementById("alladd");
+        alladdDom.onclick = function () {
+            //循环数组arr2,给每个arr2元素的check赋值false,则改变所在框的位置
+            for (var i = 0; i < arr2.length; i++) { arr2[i].check = true; }
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 })); show(arr2);
+        }
+        //点击<<全部删除>>按钮,调用渲染函数
+        var alldelDom = document.getElementById("alldel");
+        alldelDom.onclick = function () {
+            //循环数组arr2,给每个arr2元素的check赋值true,则改变所在框的位置
+            for (var i = 0; i < arr2.length; i++) { arr2[i].check = false; }
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 })); show(arr2);
+        }
+        //最上面添加数据 
+        var addDom = document.getElementById("add"); addDom.onclick = function () {
+            var nameDom = document.getElementById("name"); var name = nameDom.value;
+            arr2.push({ "id": new Date().getTime(), "name": name, "check": false, });
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
+            show(arr2);
+        }
+        var getDom = document.getElementById("get"); getDom.onclick = function () {
+            arr2.push({ "function": funname });
+            arr2.push({ "hvalue": hvalue });
+            a = JSON.stringify(arr2);
+            var JSON_data = { "js_data": 555 };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "http://127.0.0.1:8000/daping/post2", dataType: "json", data:
+                    JSON.stringify(arr2), //传进views里的数据 
+                success: function (data) { //data为地址传过来的数据 //
+                    createdata(data);//在此对data进行操作 var
+                    index = parent.layer.getFrameIndex(window.name);//获取当前弹出层的层级
+                    parent.layer.close(index);//关闭弹出层 
+                    createdata(data);//在此对data进行操作
+                    window.parent.location.reload();//刷新父页面 
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

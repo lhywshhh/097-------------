@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test" style="height: 80px; width: 90px;"></div>
+    <script>
+        layui.use(function () {
+            var element = layui.element;
+            var $ = layui.$;
+            // 动态插入导航元素
+            $('#test').html(`
+        <div class="layui-nav" lay-filter="demo-filter-nav">
+          <li class="layui-nav-item layui-this"><a href="">选中</a></li>
+          <li class="layui-nav-item"><a href="">菜单</a></li>
+          <!-- … -->
+        </div>
+      `);
+            // 渲染导航组件
+            element.render('nav', 'demo-filter-nav');
+        });
+    </script>
+</body>
+
+</html>
