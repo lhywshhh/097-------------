@@ -152,25 +152,26 @@
     </script>
     <script>
         //数据模拟
-        /* var arr2=[
+        /* var arr[0]=[
         {"id":11,"name":"1111","check":false},
         {"id":22,"name":"2222","check":false},
         {"id":33,"name":"3333","check":true},
         {"id":44,"name":"4444","check":true},
         {"id":55,"name":"5555","check":false},
         ]; */
-        // var arr2 = localStorage.getItem("p2KaoShi") ? JSON.parse(localStorage.getItem("p2KaoShi")).info : []
-        var arr2 = [
-            { "id": 10001, "name": "roaddensity", "check": false, "kind": 'null', "Y": 0 },
-            { "id": 10002, "name": "popudensity", "check": false, "kind": 'null', "Y": 0 },
-            { "id": 10003, "name": "clusterdegree", "check": false, "kind": 'null', "Y": 0 },
-            { "id": 10004, "name": "elevationmean", "check": false, "kind": 'null', "Y": 0 },
-            { "id": 10005, "name": "elevationstandard", "check": false, "kind": 'null', "Y": 0 },
-            { "id": 10006, "name": "soilmiscibility", "check": false, "kind": 'null', "Y": 0 },
-            { "id": 10007, "name": "maxiareapropo", "check": false, "kind": 'null', "Y": 0 },
-            { "id": 10008, "name": "Y", "check": false, "kind": 'null', "Y": 0 },
+        // var arr[0] = localStorage.getItem("p2KaoShi") ? JSON.parse(localStorage.getItem("p2KaoShi")).info : []
+        var arr = [
+            [
+                { "id": 10001, "name": "roaddensity", "check": false, "kind": 'null', "Y": 0 },
+                { "id": 10002, "name": "popudensity", "check": false, "kind": 'null', "Y": 0 },
+                { "id": 10003, "name": "clusterdegree", "check": false, "kind": 'null', "Y": 0 },
+                { "id": 10004, "name": "elevationmean", "check": false, "kind": 'null', "Y": 0 },
+                { "id": 10005, "name": "elevationstandard", "check": false, "kind": 'null', "Y": 0 },
+                { "id": 10006, "name": "soilmiscibility", "check": false, "kind": 'null', "Y": 0 },
+                { "id": 10007, "name": "maxiareapropo", "check": false, "kind": 'null', "Y": 0 },
+                { "id": 10008, "name": "Y", "check": false, "kind": 'null', "Y": 0 },
+            ], [], []
         ];
-        var arr22 = localStorage.getItem("p2KaoShi") ? JSON.parse(localStorage.getItem("p2KaoShi")).info : []
         //渲染数据
         //获取渲染到左边的大盒子,通过id
         var oneDom = document.getElementById("one");
@@ -180,7 +181,7 @@
         var indexp;
 
         //把可点击自由移动的小盒子,渲染到页面,
-        //循环数据arr2,判断check值为true则渲染到左边,check值为false则渲染到右边,
+        //循环数据arr[0],判断check值为true则渲染到左边,check值为false则渲染到右边,
         function show(res) {
             var leftstr = "";
             var rightstr = "";
@@ -221,21 +222,21 @@
             threeDom.innerHTML = rightstr;
         } //页面加载完毕调用渲染show
         window.onload = function () {
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
-            show(arr2);
-            show2(arr2);
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0] }));
+            show(arr[0]);
+            show2(arr[0]);
         } //点击左边的数据的小盒子,通过findIndex找到下标index
         function toleft(id) {
             var
-                index = arr2.findIndex(function (v) { return v.id == id; }) //点击他之后取反,即他会到另一个盒子 
-            arr2[index].kind = 'tbd';
-            arr2[index].check = !arr2[index].check; //console.log('index :>> ', index);
-            //console.log('arr2[index] :>> ', arr2[index]);
+                index = arr[0].findIndex(function (v) { return v.id == id; }) //点击他之后取反,即他会到另一个盒子 
+            arr[0][index].kind = 'tbd';
+            arr[0][index].check = !arr[0][index].check; //console.log('index :>> ', index);
+            //console.log('arr[0][index] :>> ', arr[0][index]);
             var e = event || window.event;
             //判断,在左边的盒子里,如果点击的对象的check值为true,然后变背景颜色为红色
             //如果对象的check值为false,则背景颜色为空
-            if (arr2[index].check === true) {
-                //console.log(arr2[index].check);
+            if (arr[0][index].check === true) {
+                //console.log(arr[0][index].check);
                 e.target.style.background = "red";
                 //console.log(e.target);
             } else {
@@ -244,16 +245,16 @@
         }
         //点击右边的数据的小盒子,通过findIndex找到下标index
         function toright(id) {
-            var index = arr2.findIndex(function (v) {
+            var index = arr[0].findIndex(function (v) {
                 return v.id == id;
             })
             //点击他之后取反,即他会到另一个盒子,不会立即执行,调用函数才执行
-            arr2[index].check = !arr2[index].check;
-            arr2[index].kind = 'null';
+            arr[0][index].check = !arr[0][index].check;
+            arr[0][index].kind = 'null';
             var e = event || window.event;
             //判断,在右边的盒子里,如果点击的对象的check值为false,然后变背景颜色为红色
             //如果对象的check值为true,则背景颜色为空
-            if (arr2[index].check == false) {
+            if (arr[0][index].check == false) {
                 e.target.style.background = "red";
             } else {
                 e.target.style.background = "";
@@ -261,15 +262,15 @@
         }
 
         function toright2(id) {
-            var index = arr2.findIndex(function (v) {
+            var index = arr[0].findIndex(function (v) {
                 return v.id == id;
             })
             //点击他之后取反,即他会到另一个盒子,不会立即执行,调用函数才执行
-            arr2[index].check = !arr2[index].check;
+            arr[0][index].check = !arr[0][index].check;
             var e = event || window.event;
             //判断,在右边的盒子里,如果点击的对象的check值为false,然后变背景颜色为红色
             //如果对象的check值为true,则背景颜色为空
-            if (arr2[index].check == false) {
+            if (arr[0][index].check == false) {
                 e.target.style.background = "red";
             } else {
                 e.target.style.background = "";
@@ -278,61 +279,62 @@
         //点击<<向右添加>>按钮,调用渲染函数
         var rightDom = document.getElementById("right");
         rightDom.onclick = function () {
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0] }));
 
-            show(arr2);
+            show(arr[0]);
         }
 
         var right2Dom = document.getElementById("right2");
         right2Dom.onclick = function () {
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0] }));
 
-            show2(arr2);
+            show2(arr[0]);
         }
 
         //点击<<向左删除>>按钮,调用渲染函数
         var leftDom = document.getElementById("left");
         leftDom.onclick = function () {
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
-            show(arr2);
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0] }));
+            show(arr[0]);
         }
 
         var left2Dom = document.getElementById("left2");
         left2Dom.onclick = function () {
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
-            show2(arr2);
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0] }));
+            show2(arr[0]);
         }
         //点击<<全部添加>>按钮,调用渲染函数
         var alladdDom = document.getElementById("alladd");
         alladdDom.onclick = function () {
-            //循环数组arr2,给每个arr2元素的check赋值false,则改变所在框的位置
-            for (var i = 0; i < arr2.length; i++) { arr2[i].check = true; }
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 })); show(arr2);
+            //循环数组arr[0],给每个arr[0]元素的check赋值false,则改变所在框的位置
+            for (var i = 0; i < arr[0].length; i++) { arr[0][i].check = true; }
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0][0] })); show(arr[0]);
         }
         //点击<<全部删除>>按钮,调用渲染函数
         var alldelDom = document.getElementById("alldel");
         alldelDom.onclick = function () {
-            //循环数组arr2,给每个arr2元素的check赋值true,则改变所在框的位置
-            for (var i = 0; i < arr2.length; i++) { arr2[i].check = false; }
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 })); show(arr2);
+            //循环数组arr[0],给每个arr[0]元素的check赋值true,则改变所在框的位置
+            for (var i = 0; i < arr[0].length; i++) { arr[0][i].check = false; }
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0][0] })); show(arr[0][0]);
         }
         //最上面添加数据 
         var addDom = document.getElementById("add"); addDom.onclick = function () {
             var nameDom = document.getElementById("name"); var name = nameDom.value;
-            arr2.push({ "id": new Date().getTime(), "name": name, "check": false, });
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr2 }));
-            show(arr2);
+            arr[0].push({ "id": new Date().getTime(), "name": name, "check": false, });
+            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0][0] }));
+            show(arr[0][0]);
         }
         var getDom = document.getElementById("get"); getDom.onclick = function () {
-            arr2.push({ "function": funname });
-            arr2.push({ "hvalue": hvalue });
-            a = JSON.stringify(arr2);
+            a = JSON.stringify(arr);
             var JSON_data = { "js_data": 555 };
+            arr[1].push({ "function": funname });
+            arr[2].push({ "hvalue": hvalue });
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: "http://127.0.0.1:8000/daping/post2", dataType: "json", data:
-                    JSON.stringify(arr2), //传进views里的数据 
+                url: "http://127.0.0.1:8000/daping/post2",
+                dataType: "json",
+                data: JSON.stringify(arr), //传进views里的数据 
                 success: function (data) { //data为地址传过来的数据 //
                     createdata(data);//在此对data进行操作 var
                     index = parent.layer.getFrameIndex(window.name);//获取当前弹出层的层级
