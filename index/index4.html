@@ -71,7 +71,7 @@
     </div>
     <div class="box">
         <div class="left">
-            <h1>未选模块</h1>
+            <h1>塌陷因子库</h1>
             <div id="one">
                 <div>111</div>
                 <div>111</div>
@@ -80,15 +80,15 @@
 
         </div>
         <div class="btn">
-            <button id="alladd">全部添加&gt;&gt;</button>
-            <button id="right">添加&gt;&gt;</button>
-            <button id="right2">添加2&gt;&gt;</button>
-            <button id="left">&lt;&lt;删除</button>
-            <button id="left2">&lt;&lt;删除2</button>
-            <button id="alldel">&lt;&lt;全部删除</button>
+            <!-- <button id="alladd">全部添加&gt;&gt;</button> -->
+            <button id="right">添加至x因子&gt;&gt;</button>
+            <button id="right2">添加至y因子&gt;&gt;</button>
+            <button id="left">&lt;&lt;删除x因子</button>
+            <button id="left2">&lt;&lt;删除y因子</button>
+            <!-- <button id="alldel">&lt;&lt;全部删除</button> -->
         </div>
         <div class="right">
-            <h1>我的模块</h1>
+            <h1>x因子库</h1>
             <div id="two">
                 <div>哈哈哈</div>
                 <div>哈哈哈</div>
@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="right2">
-            <h1>我的模块</h1>
+            <h1>y因子库</h1>
             <div id="three">
                 <div>哈哈哈</div>
                 <div>哈哈哈</div>
@@ -105,8 +105,10 @@
         </div>
     </div>
 
-    <div class="layui-form">
+    <div class="layui-form" style="position: relative; top:10px">
+        <h3>x因子分类方法：</h3>
         <select lay-filter="demo-select-filter">
+
             <option value="">请选择</option>
             <option value="equal_interval">equal_interval</option>
             <option value="quantile">quantile</option>
@@ -130,8 +132,8 @@
         });
     </script>
 
-
-    <div id="ID-slider-demo-input"></div>
+    <h3 style="position: relative; top:10px">分类方法的分级个数:</h3>
+    <div id="ID-slider-demo-input" style="position: relative; top:20px"></div>
 
 
 
@@ -303,20 +305,20 @@
             localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0] }));
             show2(arr[0]);
         }
-        //点击<<全部添加>>按钮,调用渲染函数
-        var alladdDom = document.getElementById("alladd");
-        alladdDom.onclick = function () {
-            //循环数组arr[0],给每个arr[0]元素的check赋值false,则改变所在框的位置
-            for (var i = 0; i < arr[0].length; i++) { arr[0][i].check = true; }
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0][0] })); show(arr[0]);
-        }
-        //点击<<全部删除>>按钮,调用渲染函数
-        var alldelDom = document.getElementById("alldel");
-        alldelDom.onclick = function () {
-            //循环数组arr[0],给每个arr[0]元素的check赋值true,则改变所在框的位置
-            for (var i = 0; i < arr[0].length; i++) { arr[0][i].check = false; }
-            localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0][0] })); show(arr[0][0]);
-        }
+        // //点击<<全部添加>>按钮,调用渲染函数
+        // var alladdDom = document.getElementById("alladd");
+        // alladdDom.onclick = function () {
+        //     //循环数组arr[0],给每个arr[0]元素的check赋值false,则改变所在框的位置
+        //     for (var i = 0; i < arr[0].length; i++) { arr[0][i].check = true; }
+        //     localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0][0] })); show(arr[0]);
+        // }
+        // //点击<<全部删除>>按钮,调用渲染函数
+        // var alldelDom = document.getElementById("alldel");
+        // alldelDom.onclick = function () {
+        //     //循环数组arr[0],给每个arr[0]元素的check赋值true,则改变所在框的位置
+        //     for (var i = 0; i < arr[0].length; i++) { arr[0][i].check = false; }
+        //     localStorage.setItem("p2KaoShi", JSON.stringify({ "info": arr[0][0] })); show(arr[0][0]);
+        // }
         //最上面添加数据 
         var addDom = document.getElementById("add"); addDom.onclick = function () {
             var nameDom = document.getElementById("name"); var name = nameDom.value;
@@ -332,15 +334,12 @@
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: "http://127.0.0.1:8000/daping/post2",
+                url: "http://127.0.0.1:8000/daping/post",
                 dataType: "json",
                 data: JSON.stringify(arr), //传进views里的数据 
                 success: function (data) { //data为地址传过来的数据 //
                     createdata(data);//在此对data进行操作 var
-                    index = parent.layer.getFrameIndex(window.name);//获取当前弹出层的层级
-                    parent.layer.close(index);//关闭弹出层 
-                    createdata(data);//在此对data进行操作
-                    window.parent.location.reload();//刷新父页面 
+                    window.history.go(-1);
                 }
             });
         }

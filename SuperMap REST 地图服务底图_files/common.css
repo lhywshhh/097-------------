@@ -1,0 +1,368 @@
+@charset "UTF-8";
+
+/*重写AdmineLTE 的部分效果 start*/
+body {
+    font-family: -apple-system,
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei",
+        Helvetica Neue,
+        Helvetica,
+        Arial,
+        sans-serif,
+        Apple Color Emoji,
+        "Segoe UI Emoji",
+        Segoe UI Symbol;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: -apple-system,
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei",
+        Helvetica Neue,
+        Helvetica,
+        Arial,
+        sans-serif,
+        Apple Color Emoji,
+        "Segoe UI Emoji",
+        Segoe UI Symbol;
+}
+
+a {
+    cursor: pointer;
+}
+
+/* 设置导航默认样式 */
+.main-header {
+    width: 100%;
+}
+
+.navbar-header {
+    margin: 0 40px;
+    float: left;
+}
+
+.main-header .navbar-custom-menu {
+    float: left;
+    padding: 0;
+}
+
+/* 设置导航默认样式 end */
+.main-header .navbar {
+    -webkit-transition: margin-left .3s ease-in-out;
+    -o-transition: margin-left .3s ease-in-out;
+    transition: margin-left .3s ease-in-out;
+    margin-bottom: 0;
+    margin-left: 0;
+    border: none;
+    min-height: 50px;
+    border-radius: 0
+}
+
+.iclient-footer {
+    border-top: 1px solid var(--border-color);
+}
+
+.navbar-brand {
+    height: 72px;
+    padding: 0;
+}
+
+.main-header .sidebar-toggle {
+    float: left;
+    background-color: transparent;
+    background-image: none;
+    padding: 15px 17px;
+}
+
+.navbar-nav>.nav-dropdown-menu>.dropdown-menu {
+    width: 150px;
+    box-shadow: 0px 4px 16px 0px var(--border-color);
+    padding: 0 0 0 0;
+    margin: 0;
+    top: 100%
+}
+.dropdown-menu{
+    margin: 0;
+}
+
+.main-sidebar,
+.left-side {
+    padding-top: 72px;
+}
+
+*,
+*:after,
+*::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    font-weight: 500;
+    color: var(--active-color);
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: var(--active-color);
+}
+
+/*重写AdmineLTE 的部分效果 end*/
+.skin-blue .wrapper,
+.skin-blue .main-header .navbar {
+    background-color: var(--header-background-color);
+}
+
+/*footer */
+.footer-box{
+  background-color: var(--footer-bg-color);
+}
+
+.main-footer {
+    margin: 0 auto;
+    color: var(--text-color);
+    background-color: var(--footer-bg-color);
+    overflow: hidden;
+    border-top: 0;
+    width: 1392px;
+    height: 232px;
+    padding: 0px 0px 0px 0px !important;
+}
+
+.icl-footer {
+    bottom: 0;
+}
+.icl-contact {
+    height: 188px;
+    padding-top: 49px;
+    border-bottom: 1px solid var(--alpha08);
+}
+
+.icl-copyright {
+    color: var(--text-color);
+    text-align: center;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-family: MicrosoftYaHei;
+    color: var(--alpha45);
+    line-height: 16px;
+}
+.home-link {
+    width: 49%;
+}
+.simple-footer{
+    height: 44px;
+    width: 100%;
+    box-shadow: 0px -1px 4px 0px var(--footer-shadow-color);
+}
+.icl-copyright span{
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+}
+
+.home-link-title{
+    font-size: 16px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: var(--alpha85);
+    line-height: 24px;
+    margin-bottom: 18px;
+}
+
+.contact-main {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.home-link-box {
+    width: 100%;
+}
+
+.link-box-up{
+    margin-bottom: 9px;
+}
+
+.home-link-box a {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: var(--alpha45);
+    line-height: 20px;
+}
+.home-link-box:nth-child(){
+    border-right: 1px solid var(--border-color);
+}
+
+.contact-link .home-link-box {
+    color: var(--alpha45);
+}
+
+.join-link {
+    text-align: center;
+    margin-top: 10px;
+}
+.divider {
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 16px;
+    height: 14px;
+    width: 1px;
+    background-color: var(--alpha45);
+}
+
+
+@media (max-width: 1599px) {
+    .main-footer{
+        width: 92%;
+    }
+    .icl-contact {
+        height: 152px;
+        padding-top: 40px;
+    }
+    .contact-main {
+        flex-direction: column;
+    }
+    .home-link{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 24px;
+        width: 100%;
+    }
+    .contact-link {
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 24px;
+        width: 100%;
+    }
+    .home-link-title{
+        width: 80px;
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
+    .link-box-up{
+        margin: 0px 0px 0px 0px;
+        padding-right: 16px;
+    }
+
+    .link-box-up a:last-child::after {
+        content: '';
+        display: inline-block;
+        height: 14px;
+        margin-top: -1px;
+        border-right: 1px solid var(--alpha45);
+        vertical-align: middle;
+        margin-left: 16px;
+    }
+    .home-link-box{
+        display: flex;
+        margin-bottom: 0px;
+        width: auto;
+        line-height: 25px;
+    }
+    .home-link-box a {
+        display: inline-block;
+        height: 100%;
+        line-height: 25px;
+    }
+    .divider{
+        margin: 5px 16px 0 16px;
+    }
+}
+
+@media (max-width: 991px){
+    .main-footer{
+        height: auto;
+    }
+    .icl-contact {
+        height: auto;
+        padding-top: 24px;
+    }
+    .contact-main {
+        height: 100%;
+        justify-content: start;
+    }
+    .home-link{
+        flex-direction: column;
+        height: auto;
+    }
+    .home-link-title {
+        margin-bottom: 10px;
+    }
+    .home-link-box{
+        flex-direction: column;
+    }
+    .home-link-box>div{
+        text-align: center;
+    }
+    .contact-link {
+        flex-direction: column;
+        margin-top: 24px;
+        height: auto;
+        
+    }
+}
+
+@media (min-width: 768px) {
+  .sidebar-mini.sidebar-collapse .main-header .navbar {
+      margin-left: 0
+  }
+}
+
+@media (max-width: 767px) {
+
+    .main-header .navbar-custom-menu {
+        margin: 0 !important;
+    }
+
+    .icl-nav-menu-item:not(.icl-nav-menu-overivew)>li:last-child {
+        width: 160px !important;
+    }
+    .sidebar-mini.sidebar-collapse .main-header .navbar {
+        margin-left: 0 !important;
+    }
+
+    .sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container {
+        position: relative !important;
+        float: right;
+        width: auto !important;
+        left: 180px !important;
+        top: -22px !important;
+        z-index: 900
+    }
+
+    .sidebar-mini.sidebar-collapse .main-header .navbar {
+        margin-left: 0
+    }
+
+}
+
+/*footer end */

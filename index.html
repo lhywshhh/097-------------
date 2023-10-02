@@ -33,9 +33,34 @@
 
 
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="./echarts-stat/dist/ecStat.js"></script>
+    <script src="./echarts-stat/dist/ecStat.min.js"></script>
+
+
     <script src="js/layui.js"></script>
+    <script src="js/jiangsu.js"></script>
+
     <script src="./layui-main/layui-main/dist/layui.js" charset="utf-8"></script>
     <link rel="stylesheet" href="layui-main\layui-main\dist\css\layui.css" media="all">
+    <script src="js/usa.js" type="text/javascript" charset="utf-8"></script>
+
+    <meta charset="UTF-8">
+    <title data-i18n="resources.title_heatMap"></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script type="text/javascript" src="https://iclient.supermap.io/dist/leaflet/iclient-leaflet.js"></script>
+    <script src="js/Leaflet.draw.js"></script>
+    <script src="js/Leaflet-heat.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" include="leaflet.heat" src="../../dist/leaflet/include-leaflet.js"></script>
+    <style>
+        #heatNumbers,
+        #heatRadius {
+            width: 50px;
+            display: inline-block;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -55,14 +80,14 @@
         </ul>
     </div> -->
 
-    <nav class="navbar navbar-glass navbar-fixed-top">
+    <nav class="navbar navbar-glass navbar-fixed-top" style="background-color: #1C425A;">
 
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.html">
                     <img alt="logo" src="images/logo.png">
                     <div class="navbar-title">
-                        <span class="navbar-brand-text">城市路面塌陷管理系统</span>
+                        <span class="navbar-brand-text">城市地面塌陷协同挖掘与知识平台</span>
                         <span class="navbar-brand-subtext">Urban pavement collapse management system
                         </span>
                     </div>
@@ -73,17 +98,16 @@
                     <li class="nav navbar-nav navbar-left layui-nav-item layui-this"><a href="#tab1">图表分析</a></li>
                     <li class="nav navbar-nav navbar-left layui-nav-item">
                         <a href="#tab2">地理探测器</a>
-
                     </li>
                     <li class="nav navbar-nav navbar-left layui-nav-item"><a href="nav.html">导航</a></li>
-                    <li class="nav navbar-nav navbar-left layui-nav-item">
+                    <li class="nav navbar-nav navbar-left layui-nav-item ">
                         <a href="javascript:;">子级</a>
-                        <dl class="nav navbar-nav navbar-left layui-nav-child">
+                        <dl class="layui-nav-child ">
 
-                            <button type="button" class=" layui-btn layui-btn-primary" lay-on="iframe">Iframe</button>
-                            <button type="button" class=" layui-btn layui-btn-primary" lay-on="iframe2">Iframe</button>
-                            <dd><a href="nav.html">菜单2</a></dd>
-                            <dd><a href="nav.html">菜单3</a></dd>
+                            <dd><a href="index/index3.html">塌陷风险预测</a></dd>
+                            <dd><a href="index/index4.html">地理探测器</a></dd>
+                            <dd><a href="">菜单3</a></dd>
+
                         </dl>
                     </li>
                     <li class="nav navbar-nav navbar-left layui-nav-item">
@@ -108,17 +132,46 @@
     <div id="tab1" class="tab_content">
         <section class="mainbox">
             <div class=" map">
-                <div class="chart"></div>
+                <div id="map" style="margin:0 auto;width: 100%;height: 100%; z-index: 1"></div>
                 <div class="map1"></div>
                 <div class="map2"></div>
                 <div class="map3"></div>
             </div>
             <div class="columnleft">
                 <div class="panel bar">
-                    <h2>
-                        交互探测器
-                    </h2>
-                    <div class="chart"></div>
+                    <h2>塌陷新闻</h2>
+                    <ul class="lbul" >
+                        <div style="height: 100%; width:100%;display: flex; flex-direction:column"></div>
+                    </ul>
+                    <script>
+                        const ul = document.querySelector("ul>div");
+                        let dataArr = [];
+
+                           // 添加数据
+                        $.ajax({
+                            url: "http://127.0.0.1:8000/daping/news_list",
+                            dataType: "json",
+                            async:false
+                        }).done(function (data) {
+                            //console.log('Data: ', data);
+                            const xData = [];
+                            const yData = [];
+                            for (let i in data) {
+                                if(data[i].pk!=null)
+                                dataArr.push(data[i].fields.newsdate+data[i].fields.city+data[i].fields.district+data[i].pk);
+                            }
+        
+                        });
+
+           
+
+                        // 初始渲染4条数据
+                        for (let i = 0; i < 8; i++) {
+                            const li = document.createElement("li1");
+                            li.innerHTML = dataArr[i];
+                            ul.appendChild(li);
+                        }
+                    </script>
                 </div>
                 <div class="panel line">
                     <h2>因子探测器</h2>
@@ -156,40 +209,82 @@
                 <div class="map2"></div>
                 <div class="map3"></div>
             </div>
-            <div class="columnleft">
+            <div class="columnleft1">
                 <div class="panel bar" id="1">
                     <h2>
-                        例图 <a href="javascript:;">2021</a>
-                        <a href="javacript:;"> 2020</a>
+                        因子探测器
                     </h2>
-                    <div class="chart"></div>
+                    <div class="demo-tab-header layui-btn-container" id="tabHeader" style="text-align: center;">
+                        <button class="layui-btn layui-btn-primary layui-this">渐变图</button>
+                        <button class="layui-btn layui-btn-primary">雷达图</button>
+                        <button class="layui-btn layui-btn-primary">标签3</button>
+                    </div>
+                    <div class="demo-tab-body" id="tabBody" style="width: 100%; height: 100%;">
+                        <div class="chart" style="width: 600%; height: 450%;"></div>
+                        <div class="chart2" style="width: 600%; height: 450%;"></div>
+                    </div>
+                    <script>
+                        layui.use(function () {
+                            var element = layui.element;
+                            // 绑定自定义的 tab 元素
+                            element.tab({
+                                headerElem: '#tabHeader>.layui-btn',
+                                bodyElem: '#tabBody>div'
+                            });
+                        });
+                    </script>
                 </div>
                 <div class="panel line">
-                    <h2>折线图-学习变化</h2>
+                    <h2>因子探测器原理</h2>
                     <div class="chart"></div>
                 </div>
-                <div class="panel pie">
-                    <h2>饼形图-工程师年龄分布</h2>
-                    <div class="chart"></div>
-                </div>
-            </div>
-            <div class="columnright">
 
-                <div class="panel bar1">
-                    <h2>风险点排行</h2>
-                    <div class="chart"></div>
-                </div>
-                <div class="panel line1">
-                    <h2>历史地面塌陷情况</h2>
-                    <div class="chart"></div>
-
-                </div>
-                <div class="panel pie1">
-                    <h2>塌陷原因分类</h2>
-                    <div class="chart"></div>
-                </div>
             </div>
-        </section>
+            <div class="columnmiddle">
+                <div class="panel bar2" ">
+                    <h2>
+            交互探测器
+                    </h2>
+                        <div class=" demo-tab-header layui-btn-container" id="tabHeader1" style="text-align: center;">
+                    <button class="layui-btn layui-btn-primary layui-this">渐变图</button>
+                    <button class="layui-btn layui-btn-primary">雷达图</button>
+                    <button class="layui-btn layui-btn-primary">标签3</button>
+                </div>
+                <div class="demo-tab-body" id="tabBody1" style="width: 100%; height: 100%;">
+                    <div class="chart" style="width: 4000%; height: 4500%;"></div>
+                    <div class="chart2" style="width: 600%; height: 450%;"></div>
+                </div>
+                <script>
+                    layui.use(function () {
+                        var element = layui.element;
+                        // 绑定自定义的 tab 元素
+                        element.tab({
+                            headerElem: '#tabHeader1>.layui-btn',
+                            bodyElem: '#tabBody1>div'
+                        });
+                    });
+                </script>
+            </div>
+            <div class="panel line2">
+                <h2>交互探测器原理</h2>
+                <div class="chart"></div>
+            </div>
+
+    </div>
+    <div class="columnright1">
+
+        <div class="panel bar1">
+            <h2>生态探测器</h2>
+            <div class="chart" style="position: relative; top: -50px;height: 100%;width: 100%;"></div>
+        </div>
+        <div class="panel line1">
+            <h2>生态探测器原理</h2>
+            <div class="chart"></div>
+
+        </div>
+
+    </div>
+    </section>
     </div>
 
 
@@ -444,6 +539,47 @@
         });
     </script>
 
+    <!-- 地图服务 -->
+    <script>
+        var host = window.isLocal ? window.server : "https://iserver.supermap.io";
+        var map, resultLayer,
+            url = host + "/iserver/services/map-china400/rest/maps/China";
+        map = L.map('map', {
+            preferCanvas: true,
+            center: [34.27, 117.18],
+            maxZoom: 18,
+            minZoom:5,
+            zoom: 7
+        });
+        new L.supermap.TiledMapLayer(url).addTo(map);
+        loadHeatMap();
+
+        function loadHeatMap() {
+            var heatNumbers = 1, heatRadius = 30;
+            var num = heatNumbers;
+            num = (num > 0) ? num : 0;
+            var radius = heatRadius;
+            radius = (radius > 0) ? radius : 0;
+            var heatPoints = [];
+            $.ajax({
+                url: "http://127.0.0.1:8000/daping/original_events",
+                dataType: "json",
+            }).done(function (data) {
+                j = 0;
+                for (i in data) {
+                    heatPoints[j] = [data[i].fields.latitude, data[i].fields.longitude, 40];
+                    j++;
+                }
+                resultLayer = L.heatLayer(heatPoints, {
+                    radius: radius,
+                    minOpacity: 0.5
+                }).addTo(map);
+            }).fail(function (jqXHR) {
+                console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+            });
+        }
+
+    </script>
 
 </body>
 

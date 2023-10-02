@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)https://iclient.supermap.io/examples/leaflet/editor.html -->
+<html class="dark" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="sm-theme-style" type="text/css">:root {
+  --label: dark;
+  --alpha100: rgba(255, 255, 255, 1);
+  --alpha85: rgba(255, 255, 255, 0.85);
+  --alpha65: rgba(255, 255, 255, 0.65);
+  --alpha45: rgba(255, 255, 255, 0.45);
+  --alpha35: rgba(255, 255, 255, 0.35);
+  --alpha15: rgba(255, 255, 255, 0.15);
+  --alpha14: rgba(255, 255, 255, 0.14);
+  --alpha12: rgba(255, 255, 255, 0.12);
+  --alpha08: rgba(255, 255, 255, 0.08);
+  --alpha06: rgba(255, 255, 255, 0.06);
+  --alpha04: rgba(255, 255, 255, 0.04);
+  --alpha-opposite85: rgba(0, 0, 0, 0.85);
+  --text-color: var(--alpha85);
+  --text-color-secondary: var(--alpha65);
+  --whats-new-text-color: var(--alpha65);
+  --whats-new-background-color: rgba(10, 9, 9, 1);
+  --text-color-third: var(--alpha45);
+  --icon-color: var(--alpha100);
+  --active-color: rgba(224,76,64,1);
+  --background-color: #1F1F1F;
+  --header-background-color: #333333;
+  --sidebar-background-color: #333333;
+  --wrapper-background-color: #F5F6F6;
+  --shadow-color: rgba(0, 0, 0, 0.04);
+  --border-color: var(--alpha08);
+  --footer-shadow-color: var(--alpha06);
+  --active-background-color: rgba(255,72,62,0.04);
+  --dropdown-active-background: var(--alpha04);
+  --dropdown-background-color: #414141;
+  --skin-box-background: #1F1F1F;
+  --skin-light-bg: transparent;
+  --skin-dark-bg: rgba(255,255,255,0.08);;
+  --dropdown-shadow-color: rgba(0, 0, 0, 0.35);
+  --menu-wrap-shadow: rgba(0, 0  ,0, 0.04);
+  --suffix-color: var(--alpha12)
+}</style>
+    
+    <title data-i18n="resources.title_tiledMapLayer4326">SuperMap REST 地图服务底图</title>
+    <script type="text/javascript" src="./include-web.js.下载"></script><script type="text/javascript" src="./resources.js.下载"></script>
+<script type="text/javascript" src="./tokengenerator.js.下载"></script>
+<script type="text/javascript" src="./websymbol.js.下载"></script>
+<script type="text/javascript" src="./jquery.min.js.下载"></script>
+<script type="text/javascript" src="./i18next.min.js.下载"></script>
+<script type="text/javascript" src="./jquery-i18next.min.js.下载"></script>
+<script type="text/javascript" src="./css-vars-ponyfill.min.js.下载"></script>
+<script type="text/javascript" src="./index.min.js.下载"></script>
+<script type="text/javascript" src="./utils.js.下载"></script>
+<script type="text/javascript" src="./resources.js.下载"></script><script type="text/javascript" src="./localization.js.下载"></script>
+<script type="text/javascript" src="./themeConfig.js.下载"></script>
+<script type="text/javascript" src="./theme.js.下载"></script>
+<script>Localization.initializeI18N('../', function () {Localization.localize();Localization.initGlobal();}); </script>
+
+  </head>
+  <body style="margin: 0; overflow: hidden; background: #fff; width: 100%; height: 100%; position: absolute; top: 0">
+    <div id="map" style="margin: 0px auto; width: 100%; height: 100%; position: relative; outline-style: none;" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(-308px, 0px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(0px, 0px, 0px) scale(1);"><img alt="" src="./tileImage.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(484px, 83px, 0px); opacity: 1;"><img alt="" src="./tileImage(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(740px, 83px, 0px); opacity: 1;"><img alt="" src="./tileImage(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(484px, 339px, 0px); opacity: 1;"><img alt="" src="./tileImage(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(740px, 339px, 0px); opacity: 1;"><img alt="" src="./tileImage(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(228px, 83px, 0px); opacity: 1;"><img alt="" src="./tileImage(5).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(996px, 83px, 0px); opacity: 1;"><img alt="" src="./tileImage(6).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(228px, 339px, 0px); opacity: 1;"><img alt="" src="./tileImage(7).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(996px, 339px, 0px); opacity: 1;"><img alt="" src="./tileImage(8).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-28px, 83px, 0px); opacity: 1;"><img alt="" src="./tileImage(9).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1252px, 83px, 0px); opacity: 1;"><img alt="" src="./tileImage(10).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-28px, 339px, 0px); opacity: 1;"><img alt="" src="./tileImage(11).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1252px, 339px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-overlay-pane"></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-marker-pane"></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(511px, 256px, 0px) scale(2);"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="https://iclient.supermap.io/examples/leaflet/editor.html#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">+</span></a><a class="leaflet-control-zoom-out" href="https://iclient.supermap.io/examples/leaflet/editor.html#" title="Zoom out" role="button" aria-label="Zoom out" aria-disabled="false"><span aria-hidden="true">−</span></a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="iclient-leaflet-logo leaflet-control" style="margin: 0px;"><a href="https://iclient.supermap.io/examples/leaflet/null" target="_blank" style="border: none;display: block;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF4AAAAdCAYAAAAjHtusAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozYWZlOGIwMi01MWE3LTRiZjYtYWVkYS05MGQ2ZTQ4YjZiMmUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODg0NkFBQUE3RjEzMTFFNzhFRjJFQkY4RjcxQjc1NjIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODg0NkFBQTk3RjEzMTFFNzhFRjJFQkY4RjcxQjc1NjIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4MWI3NzdhNC1lZmEyLTQ1MzUtOGQzNi03MmRjNDkyODMzN2UiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDpjYTYzODVjMi1jNDQ1LTExN2EtYTc0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" alt="SuperMap iClient" style="border: none;width:94px;height:29px;margin-right:5px;margin-bottom:2px;white-space: nowrap"></a></div><div class="leaflet-control-attribution leaflet-control">Leaflet with <span>© <a href="https://iclient.supermap.io/" title="SuperMap iClient" target="_blank">SuperMap iClient</a></span> <span aria-hidden="true">|</span> Map Data <span>© <a href="http://support.supermap.com.cn/product/iServer.aspx" title="SuperMap iServer" target="_blank">SuperMap iServer</a></span></div></div></div></div>
+    <script type="text/javascript" src="./include-leaflet.js.下载"></script><link rel="stylesheet" href="./leaflet.css">
+<script type="text/javascript" src="./leaflet.js.下载"></script>
+<script type="text/javascript" src="./iclient-leaflet-es6.min.js.下载"></script>
+
+    <script type="text/javascript">
+      var host = window.isLocal ? window.server : 'https://iserver.supermap.io';
+      var map,
+        url = host + '/iserver/services/map-world/rest/maps/World';
+
+      // 方式一：1.调用 L.supermap.initMap，根据 SuperMap iServer 地图服务的地图信息，创建地图和底图
+      L.supermap.initMap(url);
+      /*
+        // 方式二：1.调用 L.supermap.MapService，获取 SuperMap iServer 地图服务的地图信息
+        //         2.调用 L.supermap.crsFromMapJSON 创建 CRS
+        //         3.调用 L.map 创建地图
+        //         4.调用 L.supermap.TiledMapLayer 创建底图
+        new L.supermap.MapService(url).getMapInfo((res) => {
+            var crs = L.supermap.crsFromMapJSON(res.result);
+            map = L.map('map', {
+              crs: crs,
+              center: [23.909946174843483, 17.607615853850504],
+              maxZoom: 18,
+              zoom: 0
+            });
+            new L.supermap.TiledMapLayer(url).addTo(map);
+        });
+      */
+    </script>
+  
+
+<youdao_grammar_result><div></div></youdao_grammar_result></body></html>

@@ -69,7 +69,7 @@
 //             name: "直接访问",
 //             type: "bar",
 //             barWidth: "35%",
-//             data: [200, 300, 300, 900, 1500, 1200, 600],
+//             data: [200, 300, 300, 0, 1500, 1200, 600],
 //             itemStyle: {
 //                 barBorderRadius: 5
 //             }
@@ -85,7 +85,7 @@
 //     // 数据变化
 //     var dataAll = [{
 //         year: "2019",
-//         data: [200, 300, 300, 900, 1500, 1200, 600]
+//         data: [200, 300, 300, 0, 1500, 1200, 600]
 //     },
 //     {
 //         year: "2020",
@@ -100,331 +100,331 @@
 //     });
 // })();
 
+
 function createdata(data) {
     localStorage.setItem("iframedata", JSON.stringify(data));
 }
+
+//返回q独立值
+function findq(name, data) {
+    i
+    if (name == "roaddensity")
+        return data[i].roaddensity;
+    else if (name == "popudensity")
+        return data[i].popudensity;
+    else if (name == "clusterdegree")
+        return data[i].clusterdegree;
+    else if (name == "elevationmean")
+        return data[i].elevationmean;
+    else if (name == "elevationstandard")
+        return data[i].elevationstandard;
+    else if (name == "soilmiscibility")
+        return data[i].soilmiscibility;
+    else if (name == "maxiareapropo")
+        return data[i].maxiareapropo;
+};
+
+//返回p值
+function findp(name, data, p) {
+    if (name == "roaddensity")
+        return data[p].roaddensity;
+    else if (name == "popudensity")
+        return data[p].popudensity;
+    else if (name == "clusterdegree")
+        return data[p].clusterdegree;
+    else if (name == "elevationmean")
+        return data[p].elevationmean;
+    else if (name == "elevationstandard")
+        return data[p].elevationstandard;
+    else if (name == "soilmiscibility")
+        return data[p].soilmiscibility;
+    else if (name == "maxiareapropo")
+        return data[p].maxiareapropo;
+};
+
+
+
+//返回q1（y轴）
+function findq1(j, q1Data) {
+    if (j == 0)
+        return q1Data[1];
+    else if (j == 1 || j == 2)
+        return q1Data[2];
+    else if (j == 3 || j == 4 || j == 5)
+        return q1Data[3];
+    else if (j == 6 || j == 7 || j == 8 || j == 9)
+        return q1Data[4];
+    else if (j == 10 || j == 11 || j == 12 || j == 13 || j == 14)
+        return q1Data[5];
+    else if (j == 15 || j == 16 || j == 17 || j == 18 || j == 19 || j == 20)
+        return q1Data[6];
+};
+
+//返回q2（x轴）
+function findq2(j, q1Data) {
+    if (j == 20)
+        return q1Data[5];
+    else if (j == 14 || j == 19)
+        return q1Data[4];
+    else if (j == 9 || j == 13 || j == 18)
+        return q1Data[3];
+    else if (j == 5 || j == 8 || j == 12 || j == 17)
+        return q1Data[2];
+    else if (j == 2 || j == 4 || j == 7 || j == 11 || j == 16)
+        return q1Data[1];
+    else if (j == 0 || j == 1 || j == 3 || j == 6 || j == 10 || j == 15)
+        return q1Data[0];
+};
+
+//返回q1∩q2的x
+function findqqx(j, name) {
+    if (j == 20)
+        return name[5];
+    else if (j == 14 || j == 19)
+        return name[4];
+    else if (j == 9 || j == 13 || j == 18)
+        return name[3];
+    else if (j == 5 || j == 8 || j == 12 || j == 17)
+        return name[2];
+    else if (j == 2 || j == 4 || j == 7 || j == 11 || j == 16)
+        return name[1];
+    else if (j == 0 || j == 1 || j == 3 || j == 6 || j == 10 || j == 15)
+        return name[0];
+};
+
+//返回q1∩q2的y
+function findqqy(j) {
+    if (j == 0)
+        return 1;
+    else if (j == 1 || j == 2)
+        return 2;
+    else if (j == 3 || j == 4 || j == 5)
+        return 3;
+    else if (j == 6 || j == 7 || j == 8 || j == 9)
+        return 4;
+    else if (j == 10 || j == 11 || j == 12 || j == 13 || j == 14)
+        return 5;
+    else if (j == 15 || j == 16 || j == 17 || j == 18 || j == 19 || j == 20)
+        return 6;
+};
+
+//返回生态探测器q1∩q2的y
+function findqqy2(j, interdata) {
+    if (j == 0)
+        return 1 + interdata + interdata + 2;
+    else if (j == 1 || j == 2)
+        return 2 + interdata + interdata + 2;
+    else if (j == 3 || j == 4 || j == 5)
+        return 3 + interdata + interdata + 2;
+    else if (j == 6 || j == 7 || j == 8 || j == 9)
+        return 4 + interdata + interdata + 2;
+    else if (j == 10 || j == 11 || j == 12 || j == 13 || j == 14)
+        return 5 + interdata + interdata + 2;
+    else if (j == 15 || j == 16 || j == 17 || j == 18 || j == 19 || j == 20)
+        return 6 + interdata + interdata + 2;
+};
+
+//返回q1∩q2
+function findqq(name, data, x) {
+    if (name == "roaddensity")
+        return data[x].roaddensity;
+    else if (name == "popudensity")
+        return data[x].popudensity;
+    else if (name == "clusterdegree")
+        return data[x].clusterdegree;
+    else if (name == "elevationmean")
+        return data[x].elevationmean;
+    else if (name == "elevationstandard")
+        return data[x].elevationstandard;
+    else if (name == "soilmiscibility")
+        return data[x].soilmiscibility;
+    else if (name == "maxiareapropo")
+        return data[x].maxiareapropo;
+};
+
+//返回生态探测器Y对应1，N对应0
+function returnnum(name) {
+    if (name == "Y")
+        return 1;
+    else if (name == "N")
+        return 0;
+
+};
+
+//返回生态探测器的q1∩q2
+function findqq2(name, data, x) {
+    if (name == "roaddensity")
+        return returnnum(data[x].roaddensity);
+    else if (name == "popudensity")
+        return returnnum(data[x].popudensity);
+    else if (name == "clusterdegree")
+        return returnnum(data[x].clusterdegree);
+    else if (name == "elevationmean")
+        return returnnum(data[x].elevationmean);
+    else if (name == "elevationstandard")
+        return returnnum(data[x].elevationstandard);
+    else if (name == "soilmiscibility")
+        return returnnum(data[x].soilmiscibility);
+    else if (name == "maxiareapropo")
+        return returnnum(data[x].maxiareapropo);
+};
+
+//
+
 
 //日历饼图交互探测器
 (function createpie() {
     data = localStorage.getItem("iframedata");
     if (data != undefined) {
-        var myChart = echarts.init(document.querySelector("#tab1 .bar .chart"));
+        data = JSON.parse(localStorage.getItem("iframedata"))
+        var myChart = echarts.init(document.querySelector("#tab2 .bar2 .chart"));
 
         var option;
         // This example requires sECharts v5.4.0 or later
-        var cellSize = [5, 5];  //日历大少
-        var pieRadius = 25;  //饼图大小
+        const cellSize = [0.1, 0.1];  //日历大少
+        var pieRadius = 22;  //饼图大小
         var app = {};
         var incomclass =
             [
                 [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ],
                 [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ],
                 [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ], [
-                    { name: "药费", value: 900 },
-                    { name: "检查", "value": 1212 },
-                    { name: "检查", "value": 1212 }
+                    { name: "", value: 0 },
+                    { name: "", "value": 0 },
+                    { name: "", "value": 0 }
                 ],
             ]
 
+
+
         //console.log('Data: ', data);
 
-        const q1Data = {};
-        const q2Data = {};
-        const q3Data = {};
-        //道路和人口
-        // incomclass[0][0].name = "q1";
-        // incomclass[0][0].value = data[0].roaddensity;
-        // incomclass[0][1].name = "q2";
-        // incomclass[0][1].value = data[1].popudensity;
-        // incomclass[0][2].name = "q1∩q2";
-        // incomclass[0][2].value = data[1].roaddensity;
+        //交互探测器的取数逻辑
 
-        // //道路和聚集
-        // incomclass[1][0].name = "q1";
-        // incomclass[1][0].value = data[0].roaddensity;
-        // incomclass[1][1].name = "q2";
-        // incomclass[1][1].value = data[2].clusterdegree;
-        // incomclass[1][2].name = "q1∩q2";
-        // incomclass[1][2].value = data[2].roaddensity;
-
-        // //人口和聚集
-        // incomclass[2][0].name = "q1";
-        // incomclass[2][0].value = data[1].popudensity;
-        // incomclass[2][1].name = "q2";
-        // incomclass[2][1].value = data[2].clusterdegree;
-        // incomclass[2][2].name = "q1∩q2";
-        // incomclass[2][2].value = data[2].popudensity;
-
-        // //道路和高程均值
-        // incomclass[3][0].name = "q1";
-        // incomclass[3][0].value = data[0].roaddensity;
-        // incomclass[3][1].name = "q2";
-        // incomclass[3][1].value = data[3].elevationmean;
-        // incomclass[3][2].name = "q1∩q2";
-        // incomclass[3][2].value = data[3].roaddensity;
-
-        // //人口和高程均值
-        // incomclass[4][0].name = "q1";
-        // incomclass[4][0].value = data[1].popudensity;
-        // incomclass[4][1].name = "q2";
-        // incomclass[4][1].value = data[3].elevationmean;
-        // incomclass[4][2].name = "q1∩q2";
-        // incomclass[4][2].value = data[3].popudensity;
-
-        // //聚集和高程均值
-        // incomclass[5][0].name = "q1";
-        // incomclass[5][0].value = data[2].clusterdegree;
-        // incomclass[5][1].name = "q2";
-        // incomclass[5][1].value = data[3].elevationmean;
-        // incomclass[5][2].name = "q1∩q2";
-        // incomclass[5][2].value = data[3].clusterdegree;
-
-        // //人口和高程标准
-        // incomclass[6][0].name = "q1";
-        // incomclass[6][0].value = data[1].popudensity;
-        // incomclass[6][1].name = "q2";
-        // incomclass[6][1].value = data[4].elevationstandard;
-        // incomclass[6][2].name = "q1∩q2";
-        // incomclass[6][2].value = data[4].popudensity;
-
-        // //道路和高程标准
-        // incomclass[7][0].name = "q1";
-        // incomclass[7][0].value = data[0].roaddensity;
-        // incomclass[7][1].name = "q2";
-        // incomclass[7][1].value = data[4].elevationstandard;
-        // incomclass[7][2].name = "q1∩q2";
-        // incomclass[7][2].value = data[4].roaddensity;
-
-        // //聚集和高程标准
-        // incomclass[8][0].name = "q1";
-        // incomclass[8][0].value = data[2].clusterdegree;
-        // incomclass[8][1].name = "q2";
-        // incomclass[8][1].value = data[4].elevationstandard;
-        // incomclass[8][2].name = "q1∩q2";
-        // incomclass[8][2].value = data[4].clusterdegree;
-
-        // //高程均值和高程标准
-        // incomclass[9][0].name = "q1";
-        // incomclass[9][0].value = data[3].elevationmean;
-        // incomclass[9][1].name = "q2";
-        // incomclass[9][1].value = data[4].elevationstandard;
-        // incomclass[9][2].name = "q1∩q2";
-        // incomclass[9][2].value = data[4].elevationmean;
-
-        // //道路密度和土壤混杂度
-        // incomclass[10][0].name = "q1";
-        // incomclass[10][0].value = data[0].roaddensity;
-        // incomclass[10][1].name = "q2";
-        // incomclass[10][1].value = data[5].soilmiscibility;
-        // incomclass[10][2].name = "q1∩q2";
-        // incomclass[10][2].value = data[5].roaddensity;
-
-        // //人口和土壤
-        // incomclass[11][0].name = "q1";
-        // incomclass[11][0].value = data[1].popudensity;
-        // incomclass[11][1].name = "q2";
-        // incomclass[11][1].value = data[5].soilmiscibility;
-        // incomclass[11][2].name = "q1∩q2";
-        // incomclass[11][2].value = data[5].popudensity;
-
-        // //聚集和土壤
-        // incomclass[12][0].name = "q1";
-        // incomclass[12][0].value = data[2].clusterdegree;
-        // incomclass[12][1].name = "q2";
-        // incomclass[12][1].value = data[5].soilmiscibility;
-        // incomclass[12][2].name = "q1∩q2";
-        // incomclass[12][2].value = data[5].clusterdegree;
-
-        // //高程均值和土壤
-        // incomclass[13][0].name = "q1";
-        // incomclass[13][0].value = data[3].elevationmean;
-        // incomclass[13][1].name = "q2";
-        // incomclass[13][1].value = data[5].soilmiscibility;
-        // incomclass[13][2].name = "q1∩q2";
-        // incomclass[13][2].value = data[5].elevationmean;
-
-        // //高程标准和土壤
-        // incomclass[14][0].name = "q1";
-        // incomclass[14][0].value = data[4].elevationstandard;
-        // incomclass[14][1].name = "q2";
-        // incomclass[14][1].value = data[5].soilmiscibility;
-        // incomclass[14][2].name = "q1∩q2";
-        // incomclass[14][2].value = data[5].elevationstandard;
-
-        // //道路和最大
-        // incomclass[15][0].name = "q1";
-        // incomclass[15][0].value = data[0].roaddensity;
-        // incomclass[15][1].name = "q2";
-        // incomclass[15][1].value = data[6].maxiareapropo;
-        // incomclass[15][2].name = "q1∩q2";
-        // incomclass[15][2].value = data[6].roaddensity;
-
-        // //人口和最大
-        // incomclass[16][0].name = "q1";
-        // incomclass[16][0].value = data[1].popudensity;
-        // incomclass[16][1].name = "q2";
-        // incomclass[16][1].value = data[6].maxiareapropo;
-        // incomclass[16][2].name = "q1∩q2";
-        // incomclass[16][2].value = data[6].popudensity;
-
-        // //聚集和最大
-        // incomclass[17][0].name = "q1";
-        // incomclass[17][0].value = data[2].clusterdegree;
-        // incomclass[17][1].name = "q2";
-        // incomclass[17][1].value = data[6].maxiareapropo;
-        // incomclass[17][2].name = "q1∩q2";
-        // incomclass[17][2].value = data[6].clusterdegree;
-
-        // //高程均值和最大
-        // incomclass[18][0].name = "q1";
-        // incomclass[18][0].value = data[3].elevationmean;
-        // incomclass[18][1].name = "q2";
-        // incomclass[18][1].value = data[6].maxiareapropo;
-        // incomclass[18][2].name = "q1∩q2";
-        // incomclass[18][2].value = data[6].elevationmean;
-
-        // //高程标准值和最大
-        // incomclass[19][0].name = "q1";
-        // incomclass[19][0].value = data[4].elevationstandard;
-        // incomclass[19][1].name = "q2";
-        // incomclass[19][1].value = data[6].maxiareapropo;
-        // incomclass[19][2].name = "q1∩q2";
-        // incomclass[19][2].value = data[6].elevationstandard;
-
-        // //土壤和最大
-        // incomclass[20][0].name = "q1";
-        // incomclass[20][0].value = data[5].soilmiscibility;
-        // incomclass[20][1].name = "q2";
-        // incomclass[20][1].value = data[6].maxiareapropo;
-        // incomclass[20][2].name = "q1∩q2";
-        // incomclass[20][2].value = data[6].soilmiscibility;
+        //取得因子个数
+        var interdata = Object.keys(data[0]).length;
 
 
+        var qData = [];
+        //取得有哪些因子
+        var name = new Array();
+        for (i = 0; i < interdata; i++) { name[i] = (Object.keys(data[0])[i]) };
+
+        //取得各类因子独立的q值
+        var q1Data = [];
+        for (i = 0; i < interdata; i++) {
+            q1Data[i] = findq(name[i], data);
+        };
+
+        //取得有多少个饼图
+        var pienum = 0;
+        for (i = 0; i < interdata; i++) {
+            pienum += i;
+        }
 
 
+        //开始传值
+        for (j = 0; j < pienum; j++) {
+            incomclass[j][0].name = "q1";
+            incomclass[j][1].name = "q2";
+            incomclass[j][2].name = "q1∩q2";
+            incomclass[j][0].value = findq1(j, q1Data);
+            incomclass[j][1].value = findq2(j, q1Data);
+            incomclass[j][2].value = findqq(findqqx(j, name), data, findqqy(j));
 
-        // for(i=0;i<10;i++)
-        //     for(j=0;j<2;j++)
-        //         incomclass[i][j].name="q1";
-        //         incomclass[i][j].value=
-
-
-
-
-
-        // q1Data.push(data[1].popudensity);
-        // q1Data.push(data[2].clusterdegree);
-        // q1Data.push(data[3].elevationmean);
-        // q1Data.push(data[4].elevationstandard);
-        // q1Data.push(data[5].soilmiscibility);
-        // q1Data.push(data[6].maxiareapropo);
-
-        // q2Data.push(data[0].roaddensity);
-        // q2Data.push(data[1].popudensity);
-        // q2Data.push(data[2].clusterdegree);
-        // q2Data.push(data[3].elevationmean);
-        // q2Data.push(data[4].elevationstandard);
-        // q2Data.push(data[5].soilmiscibility);
-        // q2Data.push(data[6].maxiareapropo);
-
-        // q3Data.push(data[1].popudensity);
-        // q3Data.push(data[2].clusterdegree);
-        // q3Data.push(data[3].elevationmean);
-        // q3Data.push(data[4].elevationstandard);
-        // q3Data.push(data[5].soilmiscibility);
-        // q3Data.push(data[6].maxiareapropo);
+        }
 
 
 
@@ -454,28 +454,27 @@ function createdata(data) {
         }
 
         var graphData = [
-            ['2020-05-31'],
-            ['2020-06-07'],
-            ['2020-06-08'],
-            ['2020-06-14'],
-            ['2020-06-15'],
-            ['2020-06-16'],
-            ['2020-06-21'],
-            ['2020-06-22'],
-            ['2020-06-23'],
-            ['2020-06-24'],
-            ['2020-06-28'],
-            ['2020-06-29'],
-            ['2020-06-30'],
-            ['2020-07-01'],
-            ['2020-07-02'],
-            ['2020-07-05'],
-            ['2020-07-06'],
-            ['2020-07-07'],
-            ['2020-07-08'],
-            ['2020-07-09'],
-            ['2020-07-10']
-        ];
+            '2020-05-31',
+            '2020-06-07',
+            '2020-06-08',
+            '2020-06-14',
+            '2020-06-15',
+            '2020-06-16',
+            '2020-06-21',
+            '2020-06-22',
+            '2020-06-23',
+            '2020-06-24',
+            '2020-06-28',
+            '2020-06-29',
+            '2020-06-30',
+            '2020-07-01',
+            '2020-07-02',
+            '2020-07-05',
+            '2020-07-06',
+            '2020-07-07',
+            '2020-07-08',
+            '2020-07-09',
+            '2020-07-10']
 
         var scatterData = getVirtulData();
         var option = {
@@ -498,7 +497,7 @@ function createdata(data) {
 
 
             calendar: {
-                top: 30,
+                top: 5,
                 left: 50,
                 right: 0,
                 bottom: 0,
@@ -507,7 +506,7 @@ function createdata(data) {
 
 
                 orient: 'vertical',
-                cellSize: cellSize,
+                cellSize: [1.1],
                 yearLabel: {
                     show: false,
                 },
@@ -589,6 +588,70 @@ function createdata(data) {
         }
         myChart.setOption(option);
 
+
+
+        //日历图的xy轴
+        // 基于准备好的dom，初始化echarts实例
+        var trendChart = echarts.init(document.querySelector("#tab2 .bar2 .chart"));
+        var trendChartOpt = {
+
+            xAxis: {
+
+                type: "category",
+                name: "",
+                axisLabel: {
+                    fontSize: 8,
+                    interval: 0,
+                    padding: 5,
+                    color: "#b0c2f9"
+                },
+                axisLine: { show: false }
+            },
+            yAxis: [{
+                offset: -15,
+                type: "category",
+                name: "",
+                axisLabel: {
+                    fontSize: 8,
+                    interval: 0,
+                    color: "#b0c2f9"
+                },
+                axisLine: { show: false }
+            },],
+
+        };
+
+        trendChart.setOption(trendChartOpt);
+        $.ajax({
+            url: "http://127.0.0.1:8000/daping/getmonth",
+            dataType: "json",
+            async: false
+        }).done(function () {
+            $("#trendChart").addClass("chart-done");
+        }).done(function (data) {
+            //console.log('Data: ', data);
+            const xData = [];
+            const qData = [];
+            const pData = [];
+
+
+            trendChart.setOption({
+                xAxis: {
+                    data: name,
+
+
+                },
+                yAxis: {
+                    data: name,
+                },
+
+            });
+
+            window.addEventListener("resize", function () {
+                trendChart.resize();
+            });
+        })
+
         // 刷新调整
         window.onresize = function () {
             myChart.resize();
@@ -597,366 +660,1079 @@ function createdata(data) {
 
 
 
-})();
+}
+)();
 
-//日历饼图的x,y轴
-(function () {
-    // 基于准备好的dom，初始化echarts实例
-    var trendChart = echarts.init(document.querySelector("#tab1 .bar .chart"));
-    var trendChartOpt = {
+//日历热力图交互探测器
+(function createpie() {
+    data = localStorage.getItem("iframedata");
+    if (data != undefined) {
+        data = JSON.parse(localStorage.getItem("iframedata"))
+        var myChart = echarts.init(document.querySelector("#tab2 .bar2 .chart2"));
 
-        xAxis: {
+        var option;
+        // This example requires sECharts v5.4.0 or later
+        var incomclass = [];
 
-            type: "category",
-            name: "",
-            axisLabel: {
-                fontSize: 8,
-                interval: 0,
-                padding: 5,
-                color: "#b0c2f9"
-            },
-            axisLine: { show: false }
-        },
-        yAxis: [{
-            offset: -15,
-            type: "category",
-            name: "",
-            axisLabel: {
-                fontSize: 8,
-                interval: 0,
-                color: "#b0c2f9"
-            },
-            axisLine: { show: false }
-        },],
+        var graphData = [
 
-    };
+            '2020-05-31',
+            '2020-06-07',
+            '2020-06-08',
+            '2020-06-14',
+            '2020-06-15',
+            '2020-06-16',
+            '2020-06-21',
+            '2020-06-22',
+            '2020-06-23',
+            '2020-06-24',
+            '2020-06-28',
+            '2020-06-29',
+            '2020-06-30',
+            '2020-07-01',
+            '2020-07-02',
+            '2020-07-05',
+            '2020-07-06',
+            '2020-07-07',
+            '2020-07-08',
+            '2020-07-09',
+            '2020-07-10'
 
-    trendChart.setOption(trendChartOpt);
-    $.ajax({
-        url: "http://127.0.0.1:8000/daping/factor_detec",
-        dataType: "json"
-    }).done(function () {
-        $("#trendChart").addClass("chart-done");
-    }).done(function (data) {
+        ];
+
+
         //console.log('Data: ', data);
-        const xData = [];
-        const qData = [];
-        const pData = [];
+
+        //交互探测器的取数逻辑
+
+        //取得因子个数
+        var interdata = Object.keys(data[0]).length;
 
 
-        trendChart.setOption({
+        var qData = [];
+        //取得有哪些因子
+        var name = new Array();
+        for (i = 0; i < interdata; i++) { name[i] = (Object.keys(data[0])[i]) };
+
+        //取得各类因子独立的q值
+        var q1Data = [];
+        for (i = 0; i < interdata; i++) {
+            q1Data[i] = findq(name[i], data);
+        };
+
+        //取得有多少个饼图
+        var pienum = 0;
+        for (i = 0; i < interdata; i++) {
+            pienum += i;
+        }
+
+
+        //开始传值
+        for (j = 0; j < pienum; j++) {
+
+            incomclass.push([
+                graphData[j],
+                findqq(findqqx(j, name), data, findqqy(j))
+            ]);
+
+        }
+
+
+
+        //获取日历显示的日期范围
+        function getVirtulData() {
+            var date = +echarts.number.parseDate('2020-05-31');
+            var end = +echarts.number.parseDate('2020-07-19');
+            var dayTime = 3600 * 24 * 1000;
+            var data1 = [];
+            for (var time = date; time < end; time += dayTime) {
+                data1.push([
+                    echarts.format.formatTime('yyyy-MM-dd', time),
+                    Math.floor(Math.random() * 10000)
+                ]);
+            }
+            return data1;
+        }
+
+
+
+        var scatterData = getVirtulData();
+        var option = {
+
+
+            tooltip: {
+                trigger: 'item',
+                formatter: "{b} : {c} ({d}%)"
+            },
+            visualMap: {
+                min: 0,
+                max: 1,
+                type: 'piecewise',
+                orient: 'vertical',
+                right:10,
+                top: 65
+              },
+
+
+
+
+            calendar: {
+                top: 5,
+                left: 50,
+                right: 0,
+                bottom: 0,
+                height: 400,
+                width: 400,
+                cellSize:[10,10],
+
+
+                orient: 'vertical',
+                yearLabel: {
+                    show: false,
+                },
+                dayLabel: {
+                    show: false
+                },
+                monthLabel: {
+                    show: false
+                },
+                range: ['2020-05-31', '2020-07-11']
+            },
+            series: {
+                type: 'heatmap',
+                coordinateSystem: 'calendar',
+                data: incomclass
+            }
+        };
+
+
+
+
+        myChart.setOption(option);
+
+
+
+        //日历图的xy轴
+        // 基于准备好的dom，初始化echarts实例
+        var trendChart = echarts.init(document.querySelector("#tab2 .bar2 .chart2"));
+        var trendChartOpt = {
+
             xAxis: {
-                data: ["道路密度", "人口密度", "集聚程度", "高程均值", "高程标准差", "土壤混杂度", "最大面积占比"],
 
-
+                type: "category",
+                name: "",
+                axisLabel: {
+                    fontSize: 8,
+                    interval: 0,
+                    padding: 5,
+                    color: "#b0c2f9"
+                },
+                axisLine: { show: false }
             },
-            yAxis: {
-                data: ["道路密度", "人口密度", "集聚程度", "高程均值", "高程标准差", "土壤混杂度", "最大面积占比"],
-            },
+            yAxis: [{
+                offset: -15,
+                type: "category",
+                name: "",
+                axisLabel: {
+                    fontSize: 8,
+                    interval: 0,
+                    color: "#b0c2f9"
+                },
+                axisLine: { show: false }
+            },],
 
-        });
+        };
 
-        window.addEventListener("resize", function () {
-            trendChart.resize();
-        });
-    })
-})();
+        trendChart.setOption(trendChartOpt);
+        $.ajax({
+            url: "http://127.0.0.1:8000/daping/getmonth",
+            dataType: "json",
+            async: false
+        }).done(function () {
+            $("#trendChart").addClass("chart-done");
+        }).done(function (data) {
+            //console.log('Data: ', data);
+            const xData = [];
+            const qData = [];
+            const pData = [];
+
+
+            trendChart.setOption({
+                xAxis: {
+                    data: name,
+
+
+                },
+                yAxis: {
+                    data: name,
+                },
+
+            });
+
+            window.addEventListener("resize", function () {
+                trendChart.resize();
+            });
+        })
+
+        // 刷新调整
+        window.onresize = function () {
+            myChart.resize();
+        }
+    }
+
+
+
+}
+)();
+
+
+
 
 //因子探测器
-(function () {
-    // 基于准备好的dom，初始化echarts实例
-    var trendChart = echarts.init(document.querySelector("#tab1 .line .chart"));
-    var trendChartOpt = {
-        tooltip: {
-            trigger: "axis",
-            axisPointer: {
-                type: "none"
-            }
-        },
-        legend: {
-            left: "center",
-            bottom: 0,
-            itemWidth: 15,
-            itemHeight: 10,
-            textStyle: {
-                fontSize: 12,
-                color: "#b0c2f9"
-            },
-        },
-        grid: {
-            top: 40,
-            bottom: 50,
-            left: 30,
-            right: 40
-        },
-        xAxis: {
-            type: "category",
-            name: "",
+(function createline() {
+    data = localStorage.getItem("iframedata");
+    if (data != undefined) {
+        data = JSON.parse(localStorage.getItem("iframedata"))
+        // 基于准备好的dom，初始化echarts实例
+        var trendChart = echarts.init(document.querySelector("#tab2 .bar .chart"));
+        var trendChartOpt;
 
-            axisLine: {
-                lineStyle: { color: "#b0c2f9" }
-            },
-            axisTick: { show: false },
-            axisLabel: {
-                fontSize: 8,
-                interval: 0,
-                color: "#b0c2f9"
-            }
-        },
-        yAxis: [{
-            name: "p",
-            type: "value",
-            splitNumber: 5,
-            interval: 1,
-            axisLine: {
-                lineStyle: { color: "#b0c2f9" }
-            },
-            splitLine: { show: false },
-            axisTick: { color: "#b0c2f9" },
-            axisLabel: {
-                fontSize: 12,
-                color: "#b0c2f9",
-                // formatter: (value, index) => {
-                // 	return parseInt(value / 100) + "00";
-                // }
-            }
-        }, {
-            name: "q",
-            type: "value",
-            splitNumber: 0.1,
-            maxInterval: 0.3,
-            minInterval: 0,
-            interval: 0.1,
-            axisLine: {
-                lineStyle: { color: "#b0c2f9" }
-            },
-            splitLine: { show: false },
-            axisTick: { color: "#b0c2f9" },
-            axisLabel: {
-                fontSize: 12,
-                color: "#b0c2f9"
-            }
-        }],
-        series: [{
-            name: "p",
-            type: "line",
-        }, {
-            name: "q",
-            //type: "line",
-            type: "pictorialBar",
-            yAxisIndex: 1,
-            symbol: 'path://d="M150 50 L130 130 L170 130  Z"',
-            barCategoryGap: "30%",
-            itemStyle: {
-                color: function (params) {
-                    if (params.dataIndex >= 0.1) {
-                        return "rgba(230, 182, 0, 0.5)";
-                    }
-                    return "rgba(230, 182, 0, 1)";
-                }
-            },
-            markPoint: {
-                itemStyle: {
-                    color: "rgba(230, 182, 0, 1)"
-                },
-                data: [{
-                    name: "最大值",
-                    type: "max"
-                }]
-            }
-        },
-        ]
-    };
+        trendChartOpt = {
+            color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
 
-    trendChart.setOption(trendChartOpt);
-    $.ajax({
-        url: "http://127.0.0.1:8000/daping/factor_detec",
-        dataType: "json"
-    }).done(function () {
-        $("#trendChart").addClass("chart-done");
-    }).done(function (data) {
-        //console.log('Data: ', data);
-        const xData = [];
-        const qData = [];
-        const pData = [];
-        qData.push(data[0].roaddensity);
-        qData.push(data[0].popudensity);
-        qData.push(data[0].clusterdegree);
-        qData.push(data[0].elevationmean);
-        qData.push(data[0].elevationstandard);
-        qData.push(data[0].soilmiscibility);
-        qData.push(data[0].maxiareapropo);
-
-        pData.push(data[1].roaddensity);
-        pData.push(data[1].popudensity);
-        pData.push(data[1].clusterdegree);
-        pData.push(data[1].elevationmean);
-        pData.push(data[1].elevationstandard);
-        pData.push(data[1].soilmiscibility);
-        pData.push(data[1].maxiareapropo);
-
-
-        trendChart.setOption({
-            xAxis: {
-                data: ["道路密度", "人口密度", "集聚程度", "高程均值", "高程标准差", "土壤混杂度", "最大面积占比"],
-            },
-            series: [{
-                name: "p",
-                data: pData,
-            }, {
-                name: "q",
-                data: qData,
-            }]
-        });
-
-        window.addEventListener("resize", function () {
-            trendChart.resize();
-        });
-    })
-})();
-
-
-//生态探测器
-(function () {
-    var myChart = echarts.init(document.querySelector("#tab2 .pie .chart"));
-    const hours = [
-        '12a', '1a', '2a', '3a', '4a', '5a', '6a',
-        '7a', '8a', '9a', '10a', '11a',
-        '12p', '1p', '2p', '3p', '4p', '5p',
-        '6p', '7p', '8p', '9p', '10p', '11p'
-    ];
-    // prettier-ignore
-    const days = [
-        'Saturday', 'Friday', 'Thursday',
-        'Wednesday', 'Tuesday', 'Monday', 'Sunday'
-    ];
-    // prettier-ignore
-    const data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6, 0], [0, 7, 0], [0, 8, 0], [0, 9, 0], [0, 10, 0], [0, 11, 2], [0, 12, 4], [0, 13, 1], [0, 14, 1], [0, 15, 3], [0, 16, 4], [0, 17, 6], [0, 18, 4], [0, 19, 4], [0, 20, 3], [0, 21, 3], [0, 22, 2], [0, 23, 5], [1, 0, 7], [1, 1, 0], [1, 2, 0], [1, 3, 0], [1, 4, 0], [1, 5, 0], [1, 6, 0], [1, 7, 0], [1, 8, 0], [1, 9, 0], [1, 10, 5], [1, 11, 2], [1, 12, 2], [1, 13, 6], [1, 14, 9], [1, 15, 11], [1, 16, 6], [1, 17, 7], [1, 18, 8], [1, 19, 12], [1, 20, 5], [1, 21, 5], [1, 22, 7], [1, 23, 2], [2, 0, 1], [2, 1, 1], [2, 2, 0], [2, 3, 0], [2, 4, 0], [2, 5, 0], [2, 6, 0], [2, 7, 0], [2, 8, 0], [2, 9, 0], [2, 10, 3], [2, 11, 2], [2, 12, 1], [2, 13, 9], [2, 14, 8], [2, 15, 10], [2, 16, 6], [2, 17, 5], [2, 18, 5], [2, 19, 5], [2, 20, 7], [2, 21, 4], [2, 22, 2], [2, 23, 4], [3, 0, 7], [3, 1, 3], [3, 2, 0], [3, 3, 0], [3, 4, 0], [3, 5, 0], [3, 6, 0], [3, 7, 0], [3, 8, 1], [3, 9, 0], [3, 10, 5], [3, 11, 4], [3, 12, 7], [3, 13, 14], [3, 14, 13], [3, 15, 12], [3, 16, 9], [3, 17, 5], [3, 18, 5], [3, 19, 10], [3, 20, 6], [3, 21, 4], [3, 22, 4], [3, 23, 1], [4, 0, 1], [4, 1, 3], [4, 2, 0], [4, 3, 0], [4, 4, 0], [4, 5, 1], [4, 6, 0], [4, 7, 0], [4, 8, 0], [4, 9, 2], [4, 10, 4], [4, 11, 4], [4, 12, 2], [4, 13, 4], [4, 14, 4], [4, 15, 14], [4, 16, 12], [4, 17, 1], [4, 18, 8], [4, 19, 5], [4, 20, 3], [4, 21, 7], [4, 22, 3], [4, 23, 0], [5, 0, 2], [5, 1, 1], [5, 2, 0], [5, 3, 3], [5, 4, 0], [5, 5, 0], [5, 6, 0], [5, 7, 0], [5, 8, 2], [5, 9, 0], [5, 10, 4], [5, 11, 1], [5, 12, 5], [5, 13, 10], [5, 14, 5], [5, 15, 7], [5, 16, 11], [5, 17, 6], [5, 18, 0], [5, 19, 5], [5, 20, 3], [5, 21, 4], [5, 22, 2], [5, 23, 0], [6, 0, 1], [6, 1, 0], [6, 2, 0], [6, 3, 0], [6, 4, 0], [6, 5, 0], [6, 6, 0], [6, 7, 0], [6, 8, 0], [6, 9, 0], [6, 10, 1], [6, 11, 0], [6, 12, 2], [6, 13, 1], [6, 14, 3], [6, 15, 4], [6, 16, 0], [6, 17, 0], [6, 18, 0], [6, 19, 0], [6, 20, 1], [6, 21, 2], [6, 22, 2], [6, 23, 6]]
-        .map(function (item) {
-            return [item[1], item[0], item[2] || '-'];
-        });
-    option = {
-        tooltip: {
-            position: 'top'
-        },
-        grid: {
-            height: '70%',
-            top: '30%'
-        },
-        xAxis: {
-            type: 'category',
-            data: hours,
-            splitArea: {
-                show: true
-            }
-        },
-        yAxis: {
-            type: 'category',
-            data: days,
-            splitArea: {
-                show: true
-            }
-        },
-        visualMap: {
-            min: 0,
-            max: 10,
-            calculable: true,
-            orient: 'horizontal',
-            left: 'center',
-            bottom: '75%',
-
-        },
-        series: [
-            {
-                name: 'Punch Card',
-                type: 'heatmap',
-                data: data,
-                label: {
-                    show: true
-                },
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
                     }
                 }
-            }
-        ]
-    }
-    myChart.setOption(option);
-
-    // 重新把配置好的新数据给实例对象
-    myChart.setOption(option);
-    window.addEventListener("resize", function () {
-        myChart.resize();
-    });
-})();
-
-//交互探测器的影响
-(function () {
-    var re4Chart = echarts.init(document.querySelector("#tab2 .bar1 .chart"));
-    var ROOT_PATH = 'https://echarts.apache.org/examples';
-    var option;
-
-    re4Chart.showLoading();
-    $.getJSON(ROOT_PATH + '/data/asset/data/les-miserables.json', function (graph) {
-        myChart.hideLoading();
-        graph.nodes.forEach(function (node) {
-            node.label = {
-                show: node.symbolSize > 30
-            };
-        });
-        option = {
-            title: {
-                text: 'Les Miserables',
-                subtext: 'Default layout',
-                top: 'bottom',
-                left: 'right'
             },
-            tooltip: {},
-            legend: [
+            legend: {
+                data: ['q', 'p'],
+                textStyle: { color: '#FFFFFF' }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
                 {
-                    // selectedMode: 'single',
-                    data: graph.categories.map(function (a) {
-                        return a.name;
-                    })
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                 }
             ],
-            animationDuration: 1500,
-
-            animationEasingUpdate: 'quinticInOut',
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
             series: [
                 {
-                    name: 'Les Miserables',
-                    type: 'graph',
-                    layout: 'none',
-                    data: graph.nodes,
-                    links: graph.links,
-                    categories: graph.categories,
-                    roam: true,
-
-                    label: {
-                        position: 'right',
-                        formatter: '{b}'
-                    },
+                    name: 'p',
+                    type: 'line',
+                    stack: 'Total',
+                    smooth: true,
                     lineStyle: {
-                        color: 'source',
-                        curveness: 0.3
+                        width: 0
+                    },
+                    showSymbol: false,
+                    areaStyle: {
+                        opacity: 0.8,
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            {
+                                offset: 0,
+                                color: 'rgb(128, 255, 165)'
+                            },
+                            {
+                                offset: 1,
+                                color: 'rgb(1, 191, 236)'
+                            }
+                        ])
                     },
                     emphasis: {
-                        focus: 'adjacency',
-                        lineStyle: {
-                            width: 10
+                        focus: 'series'
+                    },
+                    data: [140, 232, 101, 264, 90, 340, 250]
+                },
+                {
+                    name: 'q',
+                    type: 'line',
+                    stack: 'Total',
+                    smooth: true,
+                    lineStyle: {
+                        width: 0
+                    },
+                    showSymbol: false,
+                    areaStyle: {
+                        opacity: 0.8,
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            {
+                                offset: 0,
+                                color: 'rgb(0, 221, 255)'
+                            },
+                            {
+                                offset: 1,
+                                color: 'rgb(77, 119, 255)'
+                            }
+                        ])
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: [120, 282, 111, 234, 220, 340, 310]
+                },
+
+            ]
+        };
+
+
+        trendChart.setOption(trendChartOpt);
+        $.ajax({
+            url: "http://127.0.0.1:8000/daping/factor_detec",
+            dataType: "json",
+            async: false
+        }).done(function () {
+            //console.log('Data: ', data);
+            //因子探测器的取数逻辑
+
+            //取得因子个数
+            var interdata = Object.keys(data[0]).length;
+            var q = 2 * interdata;
+            var p = 2 * interdata + 1;
+
+
+            //取得有哪些因子
+            var name = new Array();
+            for (i = 0; i < interdata; i++) { name[i] = (Object.keys(data[0])[i]) };
+
+            //取得各类因子独立的q值
+            var q1Data = [];
+            for (i = 0; i < interdata; i++) {
+                q1Data[i] = findq(name[i], data);
+            };
+
+            //取得各类因子的p值
+            var p1Data = [];
+            for (i = 0; i < interdata; i++) {
+                p1Data[i] = findp(name[i], data, p);
+            };
+
+
+            var qData = [];
+            var pData = [];
+            for (i = 0; i < interdata; i++) { qData.push(q1Data[i]); };
+            for (i = 0; i < interdata; i++) { pData.push(p1Data[i]); };
+            trendChart.setOption({
+                xAxis: {
+                    data: name,
+                },
+                series: [{
+                    name: "p",
+                    data: pData,
+                }, {
+                    name: "q",
+                    data: qData,
+                }]
+            });
+
+
+            window.addEventListener("resize", function () {
+                trendChart.resize();
+            });
+        })
+
+
+
+
+
+    }
+})();
+
+
+//生态探测器(热力图)
+(function createrec() {
+    data = localStorage.getItem("iframedata");
+    if (data != undefined) {
+        data = JSON.parse(localStorage.getItem("iframedata"))
+        var myChart = echarts.init(document.querySelector("#tab2 .bar1 .chart"));
+
+        // prettier-ignore
+
+
+        //生态探测器的取数逻辑
+        const data1 = [[5, 0, 1], [4, 0, 1], [4, 1, 1], [3, 0, 1], [3, 1, 1], [3, 2, 1], [2, 0, 1], [2, 1, 1], [2, 2, 1], [2, 3, 1], [1, 0, 1], [1, 1, 1], [1, 2, 1], [1, 3, 1], [1, 4, 1], [0, 0, 1], [0, 1, 1], [0, 2, 1], [0, 3, 1], [0, 4, 1], [0, 5, 1]]
+            .map(function (item) {
+                return [item[1], item[0], item[2] || '-'];
+            });
+
+        //取得因子个数
+        var interdata = Object.keys(data[0]).length;
+
+
+        //取得有哪些因子
+        var name = new Array();
+        for (i = 0; i < interdata; i++) { name[i] = (Object.keys(data[0])[i]) };
+
+
+        //取得有多少个块图
+        var recnum = 0;
+        for (i = 0; i < interdata; i++) {
+            recnum += i;
+        }
+
+
+        //开始穿数
+        for (j = 0; j < recnum; j++) {
+
+            data1[j][2] = findqq2(findqqx(j, name), data, findqqy2(j, interdata));
+
+        }
+
+        const hours = name;
+        // prettier-ignore
+        const days = name;
+
+        option = {
+            tooltip: {
+                position: 'bottom'
+            },
+            grid: {
+                height: '70%',
+                top: '20%'
+            },
+            xAxis: {
+                type: 'category',
+                data: hours,
+                show: true,
+                textStyle: {
+                    color: "red"
+                },
+                splitArea: {
+                    show: true
+                }
+            },
+            yAxis: {
+                type: 'category',
+                data: days,
+                show: true,
+                textStyle: {
+                    color: "red"
+                },
+                splitArea: {
+                    show: true
+                }
+            },
+            visualMap: {
+                min: 0,
+                max: 1,
+                calculable: true,
+                orient: 'vertical',
+                left: 'right',
+                bottom: "0",
+
+            },
+            series: [
+                {
+                    name: 'Punch Card',
+                    type: 'heatmap',
+                    data: data1,
+                    label: {
+                        show: true
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
                         }
                     }
                 }
             ]
-        };
-        re4Chart.setOption(re4option);
-    });
+        }
+        myChart.setOption(option);
 
-    option && re4hart.setOption(re4option);
+        // 重新把配置好的新数据给实例对象
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+            myChart.resize();
+            // localStorage.removeItem("iframedata");
+        });
+    }
 })();
+
+//因子探测器(雷达图)
+(function createradar() {
+    data = localStorage.getItem("iframedata");
+    if (data != undefined) {
+        data = JSON.parse(localStorage.getItem("iframedata"))
+        var myChart = echarts.init(document.querySelector("#tab2 .bar .chart2"));
+
+        // prettier-ignore
+
+
+        //生态探测器的取数逻辑
+        const data1 = [[5, 0, 1], [4, 0, 1], [4, 1, 1], [3, 0, 1], [3, 1, 1], [3, 2, 1], [2, 0, 1], [2, 1, 1], [2, 2, 1], [2, 3, 1], [1, 0, 1], [1, 1, 1], [1, 2, 1], [1, 3, 1], [1, 4, 1], [0, 0, 1], [0, 1, 1], [0, 2, 1], [0, 3, 1], [0, 4, 1], [0, 5, 1]]
+            .map(function (item) {
+                return [item[1], item[0], item[2] || '-'];
+            });
+
+        //取得因子个数
+        var interdata = Object.keys(data[0]).length;
+
+        var p = 2 * interdata + 1;
+
+
+        //取得有哪些因子
+        var name = new Array();
+        for (i = 0; i < interdata; i++) { name[i] = (Object.keys(data[0])[i]) };
+
+
+        //取得各类因子独立的q值
+        var q1Data = [];
+        for (i = 0; i < interdata; i++) {
+            q1Data[i] = findq(name[i], data);
+        };
+
+        //取得各类因子的p值
+        var p1Data = [];
+        for (i = 0; i < interdata; i++) {
+            p1Data[i] = findp(name[i], data, p);
+        };
+
+        var q1Data = [];
+        for (i = 0; i < interdata; i++) {
+            q1Data[i] = findq(name[i], data);
+        };
+
+        //传入因子名称
+        var indicator = [];
+
+        for (j = 0; j < interdata; j++) {
+            indicator.push({ "name": name[j], "max": 1, });
+
+        }
+
+
+
+
+
+        option = {
+
+            legend: {
+                data: ['q', 'p']
+            },
+            radar: {
+                // shape: 'circle',
+                indicator
+            },
+            series: [
+                {
+                    name: 'q vs p',
+                    type: 'radar',
+                    data: [
+                        {
+                            value: q1Data,
+                            name: 'q'
+                        },
+                        {
+                            value: p1Data,
+                            name: 'p'
+                        }
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);
+
+        // 重新把配置好的新数据给实例对象
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+            myChart.resize();
+            // localStorage.removeItem("iframedata");
+        });
+    }
+})();
+
+
+//地图变形排名图
+(function createmap() {
+
+    var myChart = echarts.init(document.querySelector("#tab1 .bar1 .chart"));
+
+    // prettier-ignore
+
+    console.log(echarts.version);
+    //生态探测器的取数逻辑
+
+    var ROOT_PATH = 'https://echarts.apache.org/examples';
+
+
+    var option;
+
+    myChart.showLoading();
+
+    myChart.hideLoading();
+    echarts.registerMap('jiangsu', jiangsujson);
+    var data1 = [];
+
+    //ajax取得排名数据
+    $.ajax({
+        url: "http://127.0.0.1:8000/daping/ranking_list2",
+        dataType: "json",
+        async: false
+    }).done(function (data) {
+        //console.log('Data: ', data);
+        const xData = [];
+        const yData = [];
+        for (let i in data) {
+            xData.push(data[i].fields.CityCounts);
+            yData.push(data[i].pk);
+        }
+
+        for (let i in data) {
+            data1.push({ "name": yData[i] + "市", "value": xData[i], });
+        }
+    })
+
+    data1.sort(function (a, b) {
+        return a.value - b.value;
+    });
+    const mapOption = {
+        visualMap: {
+            left: 'right',
+            min: 0,
+            max: 50,
+            inRange: {
+                // prettier-ignore
+                color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+            },
+            text: ['High', 'Low'],
+            calculable: true
+        },
+        series: [
+            {
+                id: 'population',
+                type: 'map',
+                roam: true,
+                map: 'jiangsu',
+                animationDurationUpdate: 1000,
+                universalTransition: true,
+                data: data1
+            }
+        ]
+    };
+    const barOption = {
+        xAxis: {
+            type: 'value'
+        },
+        yAxis: {
+            type: 'category',
+            axisLabel: {
+                rotate: 30
+            },
+            data: data1.map(function (item) {
+                return item.name;
+            })
+        },
+        animationDurationUpdate: 1000,
+        series: {
+            type: 'bar',
+            id: 'population',
+            data: data1.map(function (item) {
+                return item.value;
+            }),
+            universalTransition: true
+        }
+    };
+    let currentOption = mapOption;
+    myChart.setOption(mapOption);
+    setInterval(function () {
+        currentOption = currentOption === mapOption ? barOption : mapOption;
+        myChart.setOption(currentOption, true);
+    }, 2000);
+
+
+    option && myChart.setOption(option);
+
+
+}
+)();
+
+//塌陷事件年份散点图
+(function createmap() {
+
+    var myChart = echarts.init(document.querySelector("#tab1 .line .chart"));
+
+    // prettier-ignore
+
+    console.log(echarts.version);
+    //生态探测器的取数逻辑
+
+    var ROOT_PATH = 'https://echarts.apache.org/examples';
+
+
+    var option;
+
+    myChart.showLoading();
+
+    myChart.hideLoading();
+    echarts.registerMap('jiangsu', jiangsujson);
+    var data1 = [];
+
+    //ajax取得排名数据
+    $.ajax({
+        url: "http://127.0.0.1:8000/daping/ranking_list2",
+        dataType: "json",
+        async: false
+    }).done(function (data) {
+        //console.log('Data: ', data);
+        const xData = [];
+        const yData = [];
+        for (let i in data) {
+            xData.push(data[i].fields.CityCounts);
+            yData.push(data[i].pk);
+        }
+
+        for (let i in data) {
+            data1.push({ "name": yData[i] + "市", "value": xData[i], });
+        }
+    })
+
+    data1.sort(function (a, b) {
+        return a.value - b.value;
+    });
+    echarts.registerTransform(ecStat.transform.regression);
+const data = [
+  [0.067732, 3.176513],
+  [0.42781, 3.816464],
+  [0.995731, 4.550095],
+  [0.738336, 4.256571],
+  [0.981083, 4.560815],
+  [0.526171, 3.929515],
+  [0.378887, 3.52617],
+  [0.033859, 3.156393],
+  [0.132791, 3.110301],
+  [0.138306, 3.149813],
+  [0.247809, 3.476346],
+  [0.64827, 4.119688],
+  [0.731209, 4.282233],
+  [0.236833, 3.486582],
+  [0.969788, 4.655492],
+  [0.607492, 3.965162],
+  [0.358622, 3.5149],
+  [0.147846, 3.125947],
+  [0.63782, 4.094115],
+  [0.230372, 3.476039],
+  [0.070237, 3.21061],
+  [0.067154, 3.190612],
+  [0.925577, 4.631504],
+  [0.717733, 4.29589],
+  [0.015371, 3.085028],
+  [0.33507, 3.44808],
+  [0.040486, 3.16744],
+  [0.212575, 3.364266],
+  [0.617218, 3.993482],
+  [0.541196, 3.891471],
+  [0.045353, 3.143259],
+  [0.126762, 3.114204],
+  [0.556486, 3.851484],
+  [0.901144, 4.621899],
+  [0.958476, 4.580768],
+  [0.274561, 3.620992],
+  [0.394396, 3.580501],
+  [0.87248, 4.618706],
+  [0.409932, 3.676867],
+  [0.908969, 4.641845],
+  [0.166819, 3.175939],
+  [0.665016, 4.26498],
+  [0.263727, 3.558448],
+  [0.231214, 3.436632],
+  [0.552928, 3.831052],
+  [0.047744, 3.182853],
+  [0.365746, 3.498906],
+  [0.495002, 3.946833],
+  [0.493466, 3.900583],
+  [0.792101, 4.238522],
+  [0.76966, 4.23308],
+  [0.251821, 3.521557],
+  [0.181951, 3.203344],
+  [0.808177, 4.278105],
+  [0.334116, 3.555705],
+  [0.33863, 3.502661],
+  [0.452584, 3.859776],
+  [0.69477, 4.275956],
+  [0.590902, 3.916191],
+  [0.307928, 3.587961],
+  [0.148364, 3.183004],
+  [0.70218, 4.225236],
+  [0.721544, 4.231083],
+  [0.666886, 4.240544],
+  [0.124931, 3.222372],
+  [0.618286, 4.021445],
+  [0.381086, 3.567479],
+  [0.385643, 3.56258],
+  [0.777175, 4.262059],
+  [0.116089, 3.208813],
+  [0.115487, 3.169825],
+  [0.66351, 4.193949],
+  [0.254884, 3.491678],
+  [0.993888, 4.533306],
+  [0.295434, 3.550108],
+  [0.952523, 4.636427],
+  [0.307047, 3.557078],
+  [0.277261, 3.552874],
+  [0.279101, 3.494159],
+  [0.175724, 3.206828],
+  [0.156383, 3.195266],
+  [0.733165, 4.221292],
+  [0.848142, 4.413372],
+  [0.771184, 4.184347],
+  [0.429492, 3.742878],
+  [0.162176, 3.201878],
+  [0.917064, 4.648964],
+  [0.315044, 3.510117],
+  [0.201473, 3.274434],
+  [0.297038, 3.579622],
+  [0.336647, 3.489244],
+  [0.666109, 4.237386],
+  [0.583888, 3.913749],
+  [0.085031, 3.22899],
+  [0.687006, 4.286286],
+  [0.949655, 4.628614],
+  [0.189912, 3.239536],
+  [0.844027, 4.457997],
+  [0.333288, 3.513384],
+  [0.427035, 3.729674],
+  [0.466369, 3.834274],
+  [0.550659, 3.811155],
+  [0.278213, 3.598316],
+  [0.918769, 4.692514],
+  [0.886555, 4.604859],
+  [0.569488, 3.864912],
+  [0.066379, 3.184236],
+  [0.335751, 3.500796],
+  [0.426863, 3.743365],
+  [0.395746, 3.622905],
+  [0.694221, 4.310796],
+  [0.27276, 3.583357],
+  [0.503495, 3.901852],
+  [0.067119, 3.233521],
+  [0.038326, 3.105266],
+  [0.599122, 3.865544],
+  [0.947054, 4.628625],
+  [0.671279, 4.231213],
+  [0.434811, 3.791149],
+  [0.509381, 3.968271],
+  [0.749442, 4.25391],
+  [0.058014, 3.19471],
+  [0.482978, 3.996503],
+  [0.466776, 3.904358],
+  [0.357767, 3.503976],
+  [0.949123, 4.557545],
+  [0.41732, 3.699876],
+  [0.920461, 4.613614],
+  [0.156433, 3.140401],
+  [0.656662, 4.206717],
+  [0.616418, 3.969524],
+  [0.853428, 4.476096],
+  [0.133295, 3.136528],
+  [0.693007, 4.279071],
+  [0.178449, 3.200603],
+  [0.199526, 3.299012],
+  [0.073224, 3.209873],
+  [0.286515, 3.632942],
+  [0.182026, 3.248361],
+  [0.621523, 3.995783],
+  [0.344584, 3.563262],
+  [0.398556, 3.649712],
+  [0.480369, 3.951845],
+  [0.15335, 3.145031],
+  [0.171846, 3.181577],
+  [0.867082, 4.637087],
+  [0.223855, 3.404964],
+  [0.528301, 3.873188],
+  [0.890192, 4.633648],
+  [0.106352, 3.154768],
+  [0.917886, 4.623637],
+  [0.014855, 3.078132],
+  [0.567682, 3.913596],
+  [0.068854, 3.221817],
+  [0.603535, 3.938071],
+  [0.53205, 3.880822],
+  [0.651362, 4.176436],
+  [0.901225, 4.648161],
+  [0.204337, 3.332312],
+  [0.696081, 4.240614],
+  [0.963924, 4.532224],
+  [0.98139, 4.557105],
+  [0.987911, 4.610072],
+  [0.990947, 4.636569],
+  [0.736021, 4.229813],
+  [0.253574, 3.50086],
+  [0.674722, 4.245514],
+  [0.939368, 4.605182],
+  [0.235419, 3.45434],
+  [0.110521, 3.180775],
+  [0.218023, 3.38082],
+  [0.869778, 4.56502],
+  [0.19683, 3.279973],
+  [0.958178, 4.554241],
+  [0.972673, 4.63352],
+  [0.745797, 4.281037],
+  [0.445674, 3.844426],
+  [0.470557, 3.891601],
+  [0.549236, 3.849728],
+  [0.335691, 3.492215],
+  [0.884739, 4.592374],
+  [0.918916, 4.632025],
+  [0.441815, 3.75675],
+  [0.116598, 3.133555],
+  [0.359274, 3.567919],
+  [0.814811, 4.363382],
+  [0.387125, 3.560165],
+  [0.982243, 4.564305],
+  [0.78088, 4.215055],
+  [0.652565, 4.174999],
+  [0.87003, 4.58664],
+  [0.604755, 3.960008],
+  [0.255212, 3.529963],
+  [0.730546, 4.213412],
+  [0.493829, 3.908685],
+  [0.257017, 3.585821],
+  [0.833735, 4.374394],
+  [0.070095, 3.213817],
+  [0.52707, 3.952681],
+  [0.116163, 3.129283]
+];
+option = {
+  dataset: [
+    {
+      source: data
+    },
+    {
+      transform: {
+        type: 'ecStat:regression'
+        // 'linear' by default.
+        // config: { method: 'linear', formulaOn: 'end'}
+      }
+    }
+  ],
+  title: {
+    text: 'Linear Regression',
+    subtext: 'By ecStat.regression',
+    sublink: 'https://github.com/ecomfe/echarts-stat',
+    left: 'center'
+  },
+  legend: {
+    bottom: 5
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
+  xAxis: {
+    splitLine: {
+      lineStyle: {
+        type: 'dashed'
+      }
+    }
+  },
+  yAxis: {
+    splitLine: {
+      lineStyle: {
+        type: 'dashed'
+      }
+    }
+  },
+  series: [
+    {
+      name: 'scatter',
+      type: 'scatter'
+    },
+    {
+      name: 'line',
+      type: 'line',
+      datasetIndex: 1,
+      symbolSize: 0.1,
+      symbol: 'circle',
+      label: { show: true, fontSize: 16 },
+      labelLayout: { dx: -20 },
+      encode: { label: 2, tooltip: 1 }
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+}
+)();
+
+//轮播塌陷事件
+let timer = null;
+let li = document.querySelectorAll("li1");
+
+// 保存页面中四条数据的top值
+let topArr = [0, 40, 80, 120, 160,200,240,280];
+
+// 初始给每一条数据添加top值
+for (let i = 0; i < li.length; i++) {
+    li[i].style.top = topArr[i] + "px";
+}
+
+function run() {
+    timer = setInterval(() => {
+        for (let i = 0; i < topArr.length; i++) {
+            // 当第一条数据移出dom外面时
+            if (topArr[0] == -40) {
+                // 暂停计时器
+                clearInterval(timer);
+
+                // 将第一条数据添加到最后
+                dataArr.push(li[0].innerHTML);
+                // 删除第一条数据
+                dataArr.shift();
+
+                // 将第3条数据添加到dom的最后
+                const liDom = document.createElement("li1");
+                liDom.innerHTML = dataArr[4];
+                ul.appendChild(liDom);
+
+                // 删除dom的第一条数据
+                ul.removeChild(li[0]);
+
+                topArr.shift();
+                topArr.push(280);
+
+                // 重新获取结构改变后的dom
+                li = document.querySelectorAll("li1");
+
+                setTimeout(() => {
+                    // li[3].style.top = topArr[3] + "px";
+                    run();
+                }, 3000);
+            }
+
+            // 自减
+            topArr[i] -= 1;
+            // 重新赋值
+            li[i].style.top = topArr[i] + "px";
+        }
+    }, 20);
+}
+
+run();
+
 
 //导航栏
 (function () {
@@ -974,118 +1750,7 @@ function createdata(data) {
 })();
 
 // 折线图定制
-(function () {
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.querySelector("#tab2 .line .chart"));
 
-    // (1)准备数据
-    var data = {
-        year: [
-            [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
-            [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
-        ]
-    };
-
-    // 2. 指定配置和数据
-    var option = {
-        color: ["#00f2f1", "#ed3f35"],
-        tooltip: {
-            // 通过坐标轴来触发
-            trigger: "axis"
-        },
-        legend: {
-            // 距离容器10%
-            right: "10%",
-            // 修饰图例文字的颜色
-            textStyle: {
-                color: "#4c9bfd"
-            }
-            // 如果series 里面设置了name，此时图例组件的data可以省略
-            // data: ["邮件营销", "联盟广告"]
-        },
-        grid: {
-            top: "20%",
-            left: "3%",
-            right: "4%",
-            bottom: "3%",
-            show: true,
-            borderColor: "#012f4a",
-            containLabel: true
-        },
-
-        xAxis: {
-            type: "category",
-            boundaryGap: false,
-            data: [
-                "1月",
-                "2月",
-                "3月",
-                "4月",
-                "5月",
-                "6月",
-                "7月",
-                "8月",
-                "9月",
-                "10月",
-                "11月",
-                "12月"
-            ],
-            // 去除刻度
-            axisTick: {
-                show: false
-            },
-            // 修饰刻度标签的颜色
-            axisLabel: {
-                color: "rgba(255,255,255,.7)"
-            },
-            // 去除x坐标轴的颜色
-            axisLine: {
-                show: false
-            }
-        },
-        yAxis: {
-            type: "value",
-            // 去除刻度
-            axisTick: {
-                show: false
-            },
-            // 修饰刻度标签的颜色
-            axisLabel: {
-                color: "rgba(255,255,255,.7)"
-            },
-            // 修改y轴分割线的颜色
-            splitLine: {
-                lineStyle: {
-                    color: "#012f4a"
-                }
-            }
-        },
-        series: [{
-            name: "新增项目",
-            type: "line",
-            stack: "总量",
-            // 是否让线条圆滑显示
-            smooth: true,
-            data: data.year[0]
-        },
-        {
-            name: "新增技能",
-            type: "line",
-            stack: "总量",
-            smooth: true,
-            data: data.year[1]
-        }
-        ]
-    };
-    // 3. 把配置和数据给实例对象
-    myChart.setOption(option);
-
-    // 重新把配置好的新数据给实例对象
-    myChart.setOption(option);
-    window.addEventListener("resize", function () {
-        myChart.resize();
-    });
-})();
 
 // 饼形图定制
 // 折线图定制
