@@ -99,14 +99,11 @@
                     <li class="nav navbar-nav navbar-left layui-nav-item">
                         <a href="#tab2">地理探测器</a>
                     </li>
-                    <li class="nav navbar-nav navbar-left layui-nav-item"><a href="nav.html">导航</a></li>
                     <li class="nav navbar-nav navbar-left layui-nav-item ">
-                        <a href="javascript:;">子级</a>
+                        <a href="javascript:;">分析功能</a>
                         <dl class="layui-nav-child ">
-
-                            <dd><a href="index/index3.html">塌陷风险预测</a></dd>
-                            <dd><a href="index/index4.html">地理探测器</a></dd>
-                            <dd><a href="">菜单3</a></dd>
+                            <button type="button" class="layui-btn layui-btn-primary" lay-on="iframe">Iframe</button>
+                            <button type="button" class="layui-btn layui-btn-primary" lay-on="iframe2">Iframe</button>
 
                         </dl>
                     </li>
@@ -140,30 +137,35 @@
             <div class="columnleft">
                 <div class="panel bar">
                     <h2>塌陷新闻</h2>
-                    <ul class="lbul" >
-                        <div style="height: 100%; width:100%;display: flex; flex-direction:column"></div>
+                    <div class="chart"></div>
+
+                </div>
+                <div class="panel line">
+                    <h2>塌陷事件新闻</h2>
+                    <ul class="lbul">
+                        <div style="height: 90%; width:100%;"></div>
                     </ul>
                     <script>
                         const ul = document.querySelector("ul>div");
                         let dataArr = [];
 
-                           // 添加数据
+                        // 添加数据
                         $.ajax({
                             url: "http://127.0.0.1:8000/daping/news_list",
                             dataType: "json",
-                            async:false
+                            async: false
                         }).done(function (data) {
                             //console.log('Data: ', data);
                             const xData = [];
                             const yData = [];
                             for (let i in data) {
-                                if(data[i].pk!=null)
-                                dataArr.push(data[i].fields.newsdate+data[i].fields.city+data[i].fields.district+data[i].pk);
+                                if (data[i].pk != null)
+                                    dataArr.push(data[i].fields.newsdate + data[i].fields.city + data[i].fields.district + data[i].pk);
                             }
-        
+
                         });
 
-           
+
 
                         // 初始渲染4条数据
                         for (let i = 0; i < 8; i++) {
@@ -172,9 +174,6 @@
                             ul.appendChild(li);
                         }
                     </script>
-                </div>
-                <div class="panel line">
-                    <h2>因子探测器</h2>
                     <div class="chart"></div>
                 </div>
                 <!-- <div class="panel pie">
@@ -454,7 +453,7 @@
                         title: 'iframe test',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['800px', '800px'],
+                        area: ['1000px', '800px'],
                         content: './index/index3.html' // iframe 的 url
                     });
                 },
@@ -519,9 +518,9 @@
     </script>
     <script src="js/flexible.js"></script>
     <script src="js/echarts.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/china.js"></script>
     <script src="js/echarts-map-jiangsu.js"></script>
+    <script src="js/echarts-map-china.js"></script>
+    <script src="js/index.js"></script>
     <script src="js/myMap.js"></script>
 
 
@@ -548,7 +547,7 @@
             preferCanvas: true,
             center: [34.27, 117.18],
             maxZoom: 18,
-            minZoom:5,
+            minZoom: 5,
             zoom: 7
         });
         new L.supermap.TiledMapLayer(url).addTo(map);
@@ -581,6 +580,81 @@
 
     </script>
 
+    <!-- 地图服务2 -->
+    <script>
+
+        var myChart = echarts.init(document.querySelector("#tab1 .bar .chart"));
+        var option = {
+            tooltip: {
+                formatter: function (params) {
+                    const data = params.data;
+                    return data.name + "<br />塌陷事件数：" + data.value;
+                }
+            },
+            visualMap: {
+                type: "piecewise",
+                splitNumber: 7,
+                itemWidth: 10,
+                itemHeight: 10,
+                itemGap: 5,
+                textGap: 5,
+                textStyle: {
+                    fontSize: 10,
+                    color: "#b0c2f9"
+                },
+                min: 0,
+                max: 70,
+                calculable: true,
+                seriesIndex: [0],
+                bottom: 10,
+            },
+            geo: {
+                map: "china",
+                roam: true, //开启鼠标缩放和漫游
+                zoom: 1, //地图缩放级别
+                selectedMode: "single",
+                top: 10,
+                bottom: 10,
+                layoutCenter: ["50%", "50%"],
+                layoutSize: "100%", //保持地图宽高比
+                label: {
+                    show: true,
+                    fontSize: 10,
+                    color: "#ceac09"
+                }
+            },
+            series: [{
+                name: "地域分布",
+                type: "map",
+                geoIndex: 0
+            }]
+        };
+        myChart.setOption(option);
+        $.ajax({
+            url: "http://127.0.0.1:8000/daping/region_count2",
+            dataType: "json"
+        }).done(function () {
+            $("#mapChart").addClass("chart-done");
+        }).done(function (data) {
+            //console.log('Data: ', data);
+            const chartData = [];
+            for (let i in data) {
+                chartData.push({
+                    name: data[i].pk,
+                    value: data[i].fields.regioncounts,
+                });
+            }
+            myChart.setOption({
+                series: [{
+                    name: "地域分布",
+                    data: chartData
+                }]
+            });
+        }).fail(function (jqXHR) {
+            console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+        });
+
+    </script>
 </body>
 
 </html>

@@ -16,7 +16,7 @@
     <!-- 
 本「综合演示」包含：自定义头部工具栏、获取表格数据、表格重载、自定义模板、单双行显示、单元格编辑、自定义底部分页栏、表格相关事件与操作、与其他组件的结合等相对常用的功能，以便快速掌握 table 组件的使用。
 -->
-    <div style="padding: 16px;">
+    <div style="padding: 16px;width: 800px;">
         <table class="layui-hide" id="test" lay-filter="test"></table>
     </div>
     <script type="text/html" id="toolbarDemo">
@@ -45,16 +45,70 @@
   </select>
 </script>
     <script type="text/html" id="barDemo">
-  <div class="layui-clear-space">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-xs" lay-event="more">
-      更多 
-      <i class="layui-icon layui-icon-down"></i>
-    </a>
-  </div>
-</script>
+    </script>
+    <div class="layui-clear-space">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="more">
+            更多
+            <i class="layui-icon layui-icon-down"></i>
+        </a>
+    </div>
+    <div class="layui-form" style="position: relative; left:850px;width:100px; bottom: 700px;">
+        <h3>x因子分类方法：</h3>
+        <select lay-filter="demo-select-filter">
+            <option value="">请选择</option>
+            <option value="equal_interval">equal_interval</option>
+            <option value="quantile">quantile</option>
+            <option value="naturalbreaks">naturalbreaks</option>
+        </select>
+    </div>
+    <script>
+        var funname;
+        layui.use(function () {
+            var form = layui.form;
+            var layer = layui.layer;
+            var slider = layui.slider;
+            // select 事件
+            form.on('select(demo-select-filter)', function (data) {
+                var elem = data.elem; // 获得 select 原始 DOM 对象
+                funname = data.value; // 获得被选中的值
+                var othis = data.othis; // 获得 select 元素被替换后的 jQuery 对象
+
+                // layer.msg(this.innerHTML + ' 的 value: ' + value); // this 为当前选中 <option> 元素对象
+            });
+        });
+    </script>
+
+    <h3 style="position: relative; left:850px;width:100px; bottom: 650px;">分级个数:</h3>
+    <div id="ID-slider-demo-input" style="position: relative; left:850px;width:100px; bottom: 580px;"></div>
+
+
+
+    <script>
+        var hvalue;
+        layui.use(function () {
+            var slider = layui.slider;
+            // 渲染
+            slider.render({
+                elem: '#ID-slider-demo-input',
+                input: true,
+                type: 'vertical',
+                change: function (value) {
+                    hvalue = value;// 滑块当前值
+                    // do something
+                }//输入框
+            });
+        });
+    </script>
+    </script>
     <script src="../layui-main/layui-main/dist/layui.js" charset="utf-8"></script>
     <script>
+
+
+
+
+
+
         layui.use(['table', 'dropdown'], function () {
             var table = layui.table;
             var dropdown = layui.dropdown;
@@ -274,16 +328,20 @@
                         // layer.alert(layui.util.escape(JSON.stringify(data)));
                         // (function () {
                         var JSON_data = { "js_data": 555 };
-                        a = JSON.stringify(checkStatus.data);
+                        var a = checkStatus.data;
+                        a.push({ "function": funname });
+                        a.push({ "hvalue": hvalue });
+                        a = JSON.stringify(a);
 
                         $.ajax({
                             type: "POST",
                             contentType: "application/json; charset=utf-8",
-                            url: "http://127.0.0.1:8000/daping/post",
+                            url: "http://127.0.0.1:8000/daping/post2",
                             dataType: "json",
-                            data: JSON.stringify(JSON_data), //传进views里的数据
+                            data: a, //传进views里的数据
                             success: function (data) { //data为地址传过来的数据
-                                $("#divtest").html(data);//在此对data进行操作
+                                createdata(data);//在此对data进行操作 var
+                                parent.location.reload()
                             }
                         });
                         break;
@@ -383,6 +441,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

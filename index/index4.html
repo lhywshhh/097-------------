@@ -339,7 +339,7 @@
                 data: JSON.stringify(arr), //传进views里的数据 
                 success: function (data) { //data为地址传过来的数据 //
                     createdata(data);//在此对data进行操作 var
-                    window.history.go(-1);
+                    parent.location.reload()
                 }
             });
         }
