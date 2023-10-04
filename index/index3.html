@@ -328,10 +328,10 @@
                         // layer.alert(layui.util.escape(JSON.stringify(data)));
                         // (function () {
                         var JSON_data = { "js_data": 555 };
-                        var a = checkStatus.data;
-                        a.push({ "function": funname });
-                        a.push({ "hvalue": hvalue });
+                        var a = [checkStatus.data];
+                        a.push([{ "function": funname }], [{ "hvalue": hvalue }]);
                         a = JSON.stringify(a);
+
 
                         $.ajax({
                             type: "POST",

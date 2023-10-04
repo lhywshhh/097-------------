@@ -25,7 +25,7 @@
 /* 轮播 */
 li1 {
 
- 
+
     height: 80px;
     font-size: 14px;
     line-height: 20px;
@@ -211,7 +211,7 @@ header .showTime {
     width: 1897px;
     height: 800px;
     padding: 0px;
-    margin: 0px;
+    margin-left: -5px;
     border-width: 0px;
     cursor: default;
 }
